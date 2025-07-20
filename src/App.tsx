@@ -1,10 +1,10 @@
 import { Canvas } from '@react-three/fiber'
-import { Cube } from './Cube'
+import { Experience } from './Experience'
 
 function App() {
   return (
     <Canvas>
-      <Cube />
+      <Experience />
     </Canvas>
   )
 }
