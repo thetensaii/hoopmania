@@ -1,23 +1,31 @@
 import { useFrame } from "@react-three/fiber";
-import { RapierRigidBody, RigidBody } from "@react-three/rapier";
-import { useRef } from "react";
+import { CuboidCollider, RapierRigidBody, RigidBody } from "@react-three/rapier";
+import { type RefObject } from "react";
 import { DoubleSide } from "three";
 
 const basketDiameter_M = 0.07
 const backboardLength_M = 0.183
 const backboardHeight_M = 0.110
 
-export const Basket = () => {
-  const basketRef = useRef<RapierRigidBody>(null)
+type BasketProps = {
+  ref: RefObject<RapierRigidBody | null>
+  onBucket: () => void
+}
+
+export const Basket = ({ ref, onBucket }: BasketProps) => {
 
   useFrame((state) => {
-    if (basketRef.current) {
-      basketRef.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: -0.6, z: 1 });
+    if (ref.current) {
+      ref.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: -0.6, z: 1 });
     }
   })
 
+  const handleBucket = () => {
+    onBucket()
+  }
+
   return (
-    <RigidBody ref={basketRef} type="kinematicPosition" colliders="trimesh" position={[0, -0.6, 1]}>
+    <RigidBody ref={ref} type="kinematicPosition" colliders="trimesh" position={[0, -0.6, 1]}>
       <group >
         <mesh rotation-x={Math.PI / 2}>
           <torusGeometry args={[basketDiameter_M * 10 / 2, 0.02]} />
@@ -27,6 +35,8 @@ export const Basket = () => {
           <planeGeometry args={[backboardLength_M * 10, backboardHeight_M * 10]} />
           <meshStandardMaterial side={DoubleSide} />
         </mesh>
+
+        <CuboidCollider args={[basketDiameter_M / 2, 0.1, basketDiameter_M / 2]} position={[0, -0.3, 0]} onCollisionEnter={handleBucket} />
       </group>
     </RigidBody>
   )

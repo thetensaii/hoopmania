@@ -1,34 +1,37 @@
 import { useFrame } from "@react-three/fiber"
 import { RapierRigidBody, RigidBody } from "@react-three/rapier"
-import { useRef } from "react"
+import { type RefObject } from "react"
 
 const ballDiameter_M = 0.05
 
-export const Ball = () => {
+type BallProps = {
+  ref: RefObject<RapierRigidBody | null>
+}
 
-  const ballRef = useRef<RapierRigidBody>(null)
+
+export const Ball = ({ ref }: BallProps) => {
 
   useFrame(() => {
-    if (ballRef.current) {
-      const position = ballRef.current.translation()
+    if (ref.current) {
+      const position = ref.current.translation()
       if (position.y < -2 || position.z > 5) {
-        ballRef.current.lockTranslations(true, false)
-        ballRef.current.setTranslation({ x: 0, y: -1, z: -3 }, false)
-        ballRef.current.setLinvel({ x: 0, y: 0, z: 0 }, false)
-        ballRef.current.setAngvel({ x: 0, y: 0, z: 0 }, false)
+        ref.current.lockTranslations(true, false)
+        ref.current.setTranslation({ x: 0, y: -1, z: -3 }, false)
+        ref.current.setLinvel({ x: 0, y: 0, z: 0 }, false)
+        ref.current.setAngvel({ x: 0, y: 0, z: 0 }, false)
       }
     }
   })
 
   const handleClick = () => {
-    if (ballRef.current) {
-      ballRef.current.lockTranslations(false, true)
-      ballRef.current.applyImpulse({ x: 0, y: 0.4, z: 0.3 }, true);
+    if (ref.current) {
+      ref.current.lockTranslations(false, true)
+      ref.current.applyImpulse({ x: 0, y: 0.4, z: 0.3 }, true);
     }
   }
 
   return (
-    <RigidBody ref={ballRef} colliders="ball" lockTranslations position={[0, -1, -3]}>
+    <RigidBody ref={ref} colliders="ball" lockTranslations position={[0, -1, -3]}>
       <mesh onClick={handleClick}>
         <sphereGeometry args={[ballDiameter_M * 10 / 2]} />
         <meshStandardMaterial color="#F88158" />
