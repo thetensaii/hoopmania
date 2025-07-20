@@ -3,9 +3,11 @@ import { Experience } from './Experience'
 
 function App() {
   return (
-    <Canvas>
-      <Experience />
-    </Canvas>
+    <div id="canvas-container">
+      <Canvas>
+        <Experience />
+      </Canvas>
+    </div>
   )
 }
 

@@ -11,12 +11,12 @@ export const Basket = () => {
 
   useFrame((state) => {
     if (basketRef.current) {
-      basketRef.current.position.x = 2 * Math.sin(state.clock.getElapsedTime());
+      basketRef.current.position.x = 1.5 * Math.sin(state.clock.getElapsedTime());
     }
   })
 
   return (
-    <group ref={basketRef} position-y={-0.6} >
+    <group ref={basketRef} position={[0, -0.6, 1]} >
       <mesh rotation-x={Math.PI / 2}>
         <torusGeometry args={[basketDiameter_M * 10 / 2, 0.02]} />
         <meshStandardMaterial color="red" />

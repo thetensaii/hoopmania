@@ -9,6 +9,7 @@ export const Experience = () => {
   camera.rotation.y = Math.PI
 
   return <>
+    <color args={['#bdedfc']} attach="background" />
     <Lights />
     <Basket />
     <Ball />
