@@ -2,6 +2,7 @@ import { useThree } from "@react-three/fiber"
 import { Ball } from "./Ball"
 import { Basket } from "./Basket"
 import { Lights } from "./Lights"
+import { Physics } from "@react-three/rapier"
 
 export const Experience = () => {
   const camera = useThree((state) => state.camera)
@@ -11,7 +12,9 @@ export const Experience = () => {
   return <>
     <color args={['#bdedfc']} attach="background" />
     <Lights />
-    <Basket />
-    <Ball />
+    <Physics>
+      <Basket />
+      <Ball />
+    </Physics>
   </>
 }
