@@ -36,7 +36,7 @@ export const Basket = ({ ref, onBucket }: BasketProps) => {
           <meshStandardMaterial side={DoubleSide} />
         </mesh>
 
-        <CuboidCollider args={[basketDiameter_M / 2, 0.1, basketDiameter_M / 2]} position={[0, -0.3, 0]} onCollisionEnter={handleBucket} sensor={true} />
+        <CuboidCollider args={[basketDiameter_M / 2, 0.1, basketDiameter_M / 2]} position={[0, -0.3, 0]} onIntersectionEnter={handleBucket} sensor={true} />
       </group>
     </RigidBody>
   )

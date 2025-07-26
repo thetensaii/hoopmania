@@ -4,8 +4,10 @@ import { Basket } from "./Basket"
 import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
 import { useRef } from "react"
+import { useGameState } from "./GameState"
 
 export const Experience = () => {
+  const increaseScore = useGameState((state) => state.increaseScore)
   const camera = useThree((state) => state.camera)
   camera.position.z = -5
   camera.rotation.y = Math.PI
@@ -20,6 +22,7 @@ export const Experience = () => {
       ballRef.current.setTranslation({ x: 0, y: -1, z: -3 }, false)
       ballRef.current.setLinvel({ x: 0, y: 0, z: 0 }, false)
       ballRef.current.setAngvel({ x: 0, y: 0, z: 0 }, false)
+      increaseScore()
     }
   }
 
