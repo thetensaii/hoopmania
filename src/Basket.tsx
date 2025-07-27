@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { type RefObject } from "react";
-import { DoubleSide } from "three";
+import { DoubleSide, Vector3 } from "three";
 
 const basketDiameter_M = 0.07
 const backboardLength_M = 0.183
@@ -9,14 +9,15 @@ const backboardHeight_M = 0.110
 
 type BasketProps = {
   ref: RefObject<RapierRigidBody | null>
+  initialPosition: Vector3
   onBucket: () => void
 }
 
-export const Basket = ({ ref, onBucket }: BasketProps) => {
+export const Basket = ({ ref, initialPosition, onBucket }: BasketProps) => {
 
   useFrame((state) => {
     if (ref.current) {
-      ref.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: -0.6, z: 1 });
+      ref.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: initialPosition.y, z: initialPosition.z });
     }
   })
 
@@ -25,7 +26,7 @@ export const Basket = ({ ref, onBucket }: BasketProps) => {
   }
 
   return (
-    <RigidBody ref={ref} type="kinematicPosition" colliders="trimesh" position={[0, -0.6, 1]}>
+    <RigidBody ref={ref} type="kinematicPosition" colliders="trimesh" position={initialPosition}>
       <group >
         <mesh rotation-x={Math.PI / 2}>
           <torusGeometry args={[basketDiameter_M * 10 / 2, 0.02]} />
