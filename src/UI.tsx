@@ -3,6 +3,7 @@ import { useIsGameEnded } from "./hooks/useIsGameEnded"
 import { getTimeLeftInSec } from "./utils"
 
 export const UI = () => {
+  const restartGame = useGameState((state) => state.restartGame)
   const score = useGameState((state) => state.score)
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const currentTime = useGameState((state) => state.currentTime)
@@ -11,6 +12,9 @@ export const UI = () => {
   return <div id="ui-container" className={isGameEnded ? "active" : ""}>
     <h2 style={{ textAlign: 'center' }}>Score : {score}</h2>
     <h2 style={{ textAlign: 'center' }}>Timer : {Math.max(0, getTimeLeftInSec(lastBucketTime, currentTime)).toFixed(2)}</h2>
-    {isGameEnded && <p style={{ textAlign: 'center', fontSize: "4rem" }}>GAME OVER</p>}
+    {isGameEnded && <>
+      <p style={{ textAlign: 'center', fontSize: "4rem" }}>GAME OVER</p>
+      <div style={{ display: 'flex', justifyContent: 'center' }}><button onClick={restartGame} style={{ fontSize: '2rem' }}>RESTART</button></div>
+    </>}
   </div>
 }
