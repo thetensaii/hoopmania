@@ -4,10 +4,10 @@ import { Basket } from "./Basket"
 import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
 import { useRef } from "react"
-import { useGameState } from "./GameState"
+import { useGameState } from "../GameState"
 import { Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
-import { getTimeLeftInSec } from "./utils"
+import { getTimeLeftInSec } from "../utils"
 
 const ballInitialPosition = new Vector3(0, -1, 2)
 const basketInitialPosition = new Vector3(0, -0.6, 6)

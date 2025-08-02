@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
-import { Experience } from './Experience'
-import { UI } from './UI'
+import { Experience } from './3d/Experience'
+import { UI } from './ui/UI'
 
 function App() {
   return (
