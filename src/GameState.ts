@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type Phase = "playing" | "ended"
+type Phase = "ready" | "playing" | "ended"
 
 interface GameState {
   phase: Phase,
@@ -8,17 +8,17 @@ interface GameState {
   lastBucketTime: number,
   currentTime: number,
   endGame: () => void
-  restartGame: () => void
+  startNewGame: () => void
   scoreBucket: () => void
   updateCurrentTime: () => void
 }
 
 export const useGameState = create<GameState>((set) => ({
-  phase: "playing",
+  phase: "ready",
   score: 0,
   lastBucketTime: Date.now(),
   currentTime: Date.now(),
-  restartGame: () => set(() => ({ phase: 'playing', score: 0, lastBucketTime: Date.now(), currentTime: Date.now() })),
+  startNewGame: () => set(() => ({ phase: 'playing', score: 0, lastBucketTime: Date.now(), currentTime: Date.now() })),
   endGame: () => set(() => ({ phase: 'ended' })),
   scoreBucket: () => set((state) => ({ score: state.score + 1, lastBucketTime: Date.now() })),
   updateCurrentTime: () => set(() => ({ currentTime: Date.now() })),
