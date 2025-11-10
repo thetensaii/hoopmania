@@ -44,7 +44,7 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
     <>
       <mesh position={position} rotation={[0, Math.PI, 0]} scale={5} onPointerDown={displayArrow} onPointerMove={moveArrow} onPointerUp={handleShoot}>
         <planeGeometry />
-        <meshBasicMaterial side={DoubleSide} wireframe />
+        <meshBasicMaterial side={DoubleSide} transparent />
       </mesh>
       <group ref={arrowRef} position={position} visible={false}>
         <mesh position={[0, 0, 0.5]} rotation={[Math.PI / 2, 0, 0]}>
