@@ -59,7 +59,7 @@ export const Experience = () => {
   return <>
     <color args={['#bdedfc']} attach="background" />
     <Lights />
-    <Physics debug>
+    <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRef} initialPosition={basketInitialPosition} onBucket={handleBucket} />
       <Ball ref={ballRef} initialPosition={ballInitialPosition} />
       <ShootingPlane position={ballInitialPosition} onShoot={handleShoot} />
