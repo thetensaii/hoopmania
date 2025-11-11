@@ -1,6 +1,7 @@
 import type { ThreeEvent } from "@react-three/fiber"
 import { useRef } from "react"
 import { DoubleSide, Mesh, Vector3 } from "three"
+import { useGameState } from "../GameState"
 
 type ShootingPlanProps = {
   position: Vector3
@@ -15,10 +16,11 @@ const getPointerDirection = (event: ThreeEvent<PointerEvent>): PointerDirection 
 }
 
 export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
-
+  const canShoot = useGameState((state) => state.canShoot)
   const arrowRef = useRef<Mesh>(null)
 
   const handleShoot = (event: ThreeEvent<PointerEvent>) => {
+    if (!canShoot) return
     hideArrow()
 
     const { x, y } = getPointerDirection(event)
@@ -26,6 +28,7 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
   }
 
   const displayArrow = (event: ThreeEvent<PointerEvent>) => {
+    if (!canShoot) return
     moveArrow(event)
     if (arrowRef.current) {
       arrowRef.current.visible = true
@@ -33,6 +36,7 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
   }
 
   const moveArrow = (event: ThreeEvent<PointerEvent>) => {
+    if (!canShoot) return
     const { x, y } = getPointerDirection(event)
 
     if (arrowRef.current) {

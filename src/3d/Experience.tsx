@@ -8,14 +8,20 @@ import { useGameState } from "../GameState"
 import { Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { getTimeLeftInSec } from "../utils"
+import { ballInitialPosition, useResetBallPosition } from "../hooks/useResetBallPosition"
 
-const ballInitialPosition = new Vector3(0, -1, 2)
 const basketInitialPosition = new Vector3(0, -0.6, 6)
 
 export const Experience = () => {
+  const basketRef = useRef<RapierRigidBody>(null)
+  const ballRef = useRef<RapierRigidBody>(null)
+
   const scoreBucket = useGameState((state) => state.scoreBucket)
   const endGame = useGameState((state) => state.endGame)
   const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
+  const setCanShoot = useGameState((state) => state.setCanShoot)
+  const resetBallPosition = useResetBallPosition(ballRef)
+
   const phase = useGameState((state) => state.phase)
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const currentTime = useGameState((state) => state.currentTime)
@@ -23,11 +29,6 @@ export const Experience = () => {
   const camera = useThree((state) => state.camera)
   camera.position.z = 0
   camera.rotation.y = Math.PI
-
-
-  const basketRef = useRef<RapierRigidBody>(null)
-  const ballRef = useRef<RapierRigidBody>(null)
-
 
   useFrame(() => {
     if (phase === 'playing') {
@@ -43,15 +44,13 @@ export const Experience = () => {
     if (ballRef.current) {
       ballRef.current.lockTranslations(false, true)
       ballRef.current.applyImpulse({ x: x, y: y, z: 0.3 }, true);
+      setCanShoot(false)
     }
   }
 
   const handleBucket = () => {
     if (ballRef.current) {
-      ballRef.current.lockTranslations(true, false)
-      ballRef.current.setTranslation(ballInitialPosition, false)
-      ballRef.current.setLinvel({ x: 0, y: 0, z: 0 }, false)
-      ballRef.current.setAngvel({ x: 0, y: 0, z: 0 }, false)
+      resetBallPosition()
       scoreBucket()
     }
   }
@@ -61,7 +60,7 @@ export const Experience = () => {
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRef} initialPosition={basketInitialPosition} onBucket={handleBucket} />
-      <Ball ref={ballRef} initialPosition={ballInitialPosition} />
+      <Ball ballRef={ballRef} initialPosition={ballInitialPosition} />
       <ShootingPlane position={ballInitialPosition} onShoot={handleShoot} />
     </Physics>
   </>
