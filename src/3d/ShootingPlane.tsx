@@ -6,6 +6,13 @@ type ShootingPlanProps = {
   position: Vector3
   onShoot: (x: number, y: number) => void
 }
+type PointerDirection = { x: number, y: number }
+const getPointerDirection = (event: ThreeEvent<PointerEvent>): PointerDirection => {
+  const x = -((event.uv?.x ?? 0.5) - 0.5) * 1.5
+  const y = Math.max((event.uv?.y ?? 0.5) - 0.5, 0.02) * 1.5
+
+  return { x, y }
+}
 
 export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
 
@@ -13,21 +20,20 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
 
   const handleShoot = (event: ThreeEvent<PointerEvent>) => {
     hideArrow()
-    const x = -((event.uv?.x ?? 0.5) - 0.5) * 1.5
-    const y = Math.max((event.uv?.y ?? 0.5) - 0.5, 0.02) * 1.5
 
+    const { x, y } = getPointerDirection(event)
     onShoot(x, y)
   }
 
-  const displayArrow = () => {
+  const displayArrow = (event: ThreeEvent<PointerEvent>) => {
+    moveArrow(event)
     if (arrowRef.current) {
       arrowRef.current.visible = true
     }
   }
 
   const moveArrow = (event: ThreeEvent<PointerEvent>) => {
-    const x = -((event.uv?.x ?? 0.5) - 0.5) * 1.5
-    const y = Math.max((event.uv?.y ?? 0.5) - 0.5, 0.02) * 1.5
+    const { x, y } = getPointerDirection(event)
 
     if (arrowRef.current) {
       arrowRef.current.lookAt(new Vector3(x, y, 0.3).add(position))
