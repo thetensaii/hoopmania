@@ -16,11 +16,11 @@ const getPointerDirection = (event: ThreeEvent<PointerEvent>): PointerDirection 
 }
 
 export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
-  const canShoot = useGameState((state) => state.canShoot)
+  const isShooting = useGameState((state) => state.isShooting)
   const arrowRef = useRef<Mesh>(null)
 
   const handleShoot = (event: ThreeEvent<PointerEvent>) => {
-    if (!canShoot) return
+    if (isShooting) return
     hideArrow()
 
     const { x, y } = getPointerDirection(event)
@@ -28,7 +28,7 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
   }
 
   const displayArrow = (event: ThreeEvent<PointerEvent>) => {
-    if (!canShoot) return
+    if (isShooting) return
     moveArrow(event)
     if (arrowRef.current) {
       arrowRef.current.visible = true
@@ -36,7 +36,7 @@ export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
   }
 
   const moveArrow = (event: ThreeEvent<PointerEvent>) => {
-    if (!canShoot) return
+    if (isShooting) return
     const { x, y } = getPointerDirection(event)
 
     if (arrowRef.current) {

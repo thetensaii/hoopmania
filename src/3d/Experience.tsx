@@ -19,12 +19,13 @@ export const Experience = () => {
   const scoreBucket = useGameState((state) => state.scoreBucket)
   const endGame = useGameState((state) => state.endGame)
   const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
-  const setCanShoot = useGameState((state) => state.setCanShoot)
+  const setIsShooting = useGameState((state) => state.setIsShooting)
   const resetBallPosition = useResetBallPosition(ballRef)
 
   const phase = useGameState((state) => state.phase)
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const currentTime = useGameState((state) => state.currentTime)
+  const isShooting = useGameState((state) => state.isShooting)
 
   const camera = useThree((state) => state.camera)
   camera.position.z = 0
@@ -32,7 +33,7 @@ export const Experience = () => {
 
   useFrame(() => {
     if (phase === 'playing') {
-      if (getTimeLeftInSec(lastBucketTime, currentTime) > 0) {
+      if (getTimeLeftInSec(lastBucketTime, currentTime) > 0 || isShooting) {
         updateCurrentTime()
       } else {
         endGame()
@@ -44,7 +45,7 @@ export const Experience = () => {
     if (ballRef.current) {
       ballRef.current.lockTranslations(false, true)
       ballRef.current.applyImpulse({ x: x, y: y, z: 0.3 }, true);
-      setCanShoot(false)
+      setIsShooting(true)
     }
   }
 
