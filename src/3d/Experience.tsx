@@ -5,7 +5,7 @@ import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
 import { useRef } from "react"
 import { useGameState } from "../GameState"
-import { Mesh, Vector3 } from "three"
+import { Group, Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { getTimeLeftInSec } from "../utils"
 import { ballInitialPosition, useBallActions } from "../hooks/3d/useBallActions"
@@ -18,13 +18,14 @@ const basketInitialPosition = new Vector3(0, -0.6, 6)
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
   const ballRef = useRef<RapierRigidBody>(null)
+  const arrowGroupRef = useRef<Group>(null)
   const arrowRef = useRef<Mesh>(null)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
   const endGame = useGameState((state) => state.endGame)
   const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
   const { resetBallPosition, shootBall } = useBallActions(ballRef)
-  const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowRef, ballPosition: ballInitialPosition })
+  const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: ballInitialPosition })
 
   const isGamePlaying = useIsGamePlaying()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
@@ -80,7 +81,7 @@ export const Experience = () => {
             shootBall(pointerDirection)
           }
         }} />
-      <ShootingArrow arrowRef={arrowRef} position={ballInitialPosition} />
+      <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={ballInitialPosition} />
     </Physics>
   </>
 }
