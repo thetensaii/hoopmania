@@ -2,7 +2,7 @@ import { useFrame } from "@react-three/fiber"
 import { RapierRigidBody, RigidBody } from "@react-three/rapier"
 import { type RefObject } from "react"
 import type { Vector3 } from "three"
-import { useResetBallPosition } from "../hooks/useResetBallPosition"
+import { useBallActions } from "../hooks/3d/useBallActions"
 
 const ballDiameter_M = 0.05
 
@@ -13,7 +13,7 @@ type BallProps = {
 
 
 export const Ball = ({ ballRef, initialPosition }: BallProps) => {
-  const resetBallPosition = useResetBallPosition(ballRef)
+  const { resetBallPosition } = useBallActions(ballRef)
 
   useFrame(() => {
     if (ballRef.current) {

@@ -1,4 +1,3 @@
-import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { type RefObject } from "react";
 import { DoubleSide, Vector3 } from "three";
@@ -14,13 +13,6 @@ type BasketProps = {
 }
 
 export const Basket = ({ ref, initialPosition, onBucket }: BasketProps) => {
-
-  useFrame((state) => {
-    if (ref.current) {
-      ref.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: initialPosition.y, z: initialPosition.z });
-    }
-  })
-
   const handleBucket = () => {
     onBucket()
   }

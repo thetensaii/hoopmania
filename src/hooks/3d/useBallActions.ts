@@ -1,12 +1,12 @@
 import type { RapierRigidBody } from "@react-three/rapier"
 import type { RefObject } from "react"
-import { useGameState } from "../GameState"
 import { Vector3 } from "three"
+import { useGameState } from "../../GameState"
+import type { PointerDirection } from "./useShootingArrowActions"
 
 export const ballInitialPosition = new Vector3(0, -1, 2)
 
-export const useResetBallPosition = (ballRef: RefObject<RapierRigidBody | null>) => {
-
+export const useBallActions = (ballRef: RefObject<RapierRigidBody | null>) => {
   const setIsShooting = useGameState((state) => state.setIsShooting)
   const resetBallPosition = () => {
     if (ballRef.current) {
@@ -19,5 +19,14 @@ export const useResetBallPosition = (ballRef: RefObject<RapierRigidBody | null>)
     }
   }
 
-  return resetBallPosition
+  const shootBall = ({ x, y }: PointerDirection) => {
+    if (ballRef.current) {
+      setIsShooting(true)
+
+      ballRef.current.lockTranslations(false, true)
+      ballRef.current.applyImpulse({ x: x, y: y, z: 0.3 }, true);
+    }
+  }
+
+  return { resetBallPosition, shootBall }
 }

@@ -1,68 +1,26 @@
-import type { ThreeEvent } from "@react-three/fiber"
-import { useRef } from "react"
-import { DoubleSide, Mesh, Vector3 } from "three"
-import { useGameState } from "../GameState"
+import { DoubleSide, Vector3 } from "three"
+import { getPointerDirection, type PointerDirection } from "../hooks/3d/useShootingArrowActions"
 
 type ShootingPlanProps = {
   position: Vector3
-  onShoot: (x: number, y: number) => void
-}
-type PointerDirection = { x: number, y: number }
-const getPointerDirection = (event: ThreeEvent<PointerEvent>): PointerDirection => {
-  const x = -((event.uv?.x ?? 0.5) - 0.5) * 1.5
-  const y = Math.max((event.uv?.y ?? 0.5) - 0.5, 0.02) * 1.5
-
-  return { x, y }
+  onPointerDown: (direction: PointerDirection) => void
+  onPointerMove: (direction: PointerDirection) => void
+  onPointerUp: (direction: PointerDirection) => void
 }
 
-export const ShootingPlane = ({ position, onShoot }: ShootingPlanProps) => {
-  const isShooting = useGameState((state) => state.isShooting)
-  const arrowRef = useRef<Mesh>(null)
-
-  const handleShoot = (event: ThreeEvent<PointerEvent>) => {
-    if (isShooting) return
-    hideArrow()
-
-    const { x, y } = getPointerDirection(event)
-    onShoot(x, y)
-  }
-
-  const displayArrow = (event: ThreeEvent<PointerEvent>) => {
-    if (isShooting) return
-    moveArrow(event)
-    if (arrowRef.current) {
-      arrowRef.current.visible = true
-    }
-  }
-
-  const moveArrow = (event: ThreeEvent<PointerEvent>) => {
-    if (isShooting) return
-    const { x, y } = getPointerDirection(event)
-
-    if (arrowRef.current) {
-      arrowRef.current.lookAt(new Vector3(x, y, 0.3).add(position))
-    }
-  }
-
-  const hideArrow = () => {
-    if (arrowRef.current) {
-      arrowRef.current.visible = false
-    }
-  }
+export const ShootingPlane = ({ position, onPointerDown, onPointerMove, onPointerUp }: ShootingPlanProps) => {
 
   return (
-    <>
-      <mesh position={position} rotation={[0, Math.PI, 0]} scale={5} onPointerDown={displayArrow} onPointerMove={moveArrow} onPointerUp={handleShoot}>
-        <planeGeometry />
-        <meshBasicMaterial side={DoubleSide} transparent opacity={0} />
-      </mesh>
-      <group ref={arrowRef} position={position} visible={false}>
-        <mesh position={[0, 0, 0.5]} rotation={[Math.PI / 2, 0, 0]}>
-          <cylinderGeometry args={[0.03, 0.03, 1, 20]} />
-          <meshBasicMaterial color={"blue"} side={DoubleSide} />
-        </mesh>
-      </group>
-    </>
-
+    <mesh
+      position={position}
+      rotation={[0, Math.PI, 0]}
+      scale={5}
+      onPointerDown={(e) => onPointerDown(getPointerDirection(e))}
+      onPointerMove={(e) => onPointerMove(getPointerDirection(e))}
+      onPointerUp={(e) => onPointerUp(getPointerDirection(e))}
+    >
+      <planeGeometry />
+      <meshBasicMaterial side={DoubleSide} transparent opacity={0} />
+    </mesh>
   )
 }

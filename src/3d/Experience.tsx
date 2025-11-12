@@ -5,24 +5,28 @@ import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
 import { useRef } from "react"
 import { useGameState } from "../GameState"
-import { Vector3 } from "three"
+import { Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { getTimeLeftInSec } from "../utils"
-import { ballInitialPosition, useResetBallPosition } from "../hooks/useResetBallPosition"
+import { ballInitialPosition, useBallActions } from "../hooks/3d/useBallActions"
+import { ShootingArrow } from "./ShootingArrow"
+import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
+import { useIsGamePlaying } from "../hooks/useIsGamePlaying"
 
 const basketInitialPosition = new Vector3(0, -0.6, 6)
 
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
   const ballRef = useRef<RapierRigidBody>(null)
+  const arrowRef = useRef<Mesh>(null)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
   const endGame = useGameState((state) => state.endGame)
   const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
-  const setIsShooting = useGameState((state) => state.setIsShooting)
-  const resetBallPosition = useResetBallPosition(ballRef)
+  const { resetBallPosition, shootBall } = useBallActions(ballRef)
+  const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowRef, ballPosition: ballInitialPosition })
 
-  const phase = useGameState((state) => state.phase)
+  const isGamePlaying = useIsGamePlaying()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const currentTime = useGameState((state) => state.currentTime)
   const isShooting = useGameState((state) => state.isShooting)
@@ -31,23 +35,19 @@ export const Experience = () => {
   camera.position.z = 0
   camera.rotation.y = Math.PI
 
-  useFrame(() => {
-    if (phase === 'playing') {
+  useFrame((state) => {
+    if (isGamePlaying) {
       if (getTimeLeftInSec(lastBucketTime, currentTime) > 0 || isShooting) {
         updateCurrentTime()
       } else {
         endGame()
       }
+
+      if (basketRef.current) {
+        basketRef.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: basketInitialPosition.y, z: basketInitialPosition.z });
+      }
     }
   })
-
-  const handleShoot = (x: number, y: number) => {
-    if (ballRef.current) {
-      ballRef.current.lockTranslations(false, true)
-      ballRef.current.applyImpulse({ x: x, y: y, z: 0.3 }, true);
-      setIsShooting(true)
-    }
-  }
 
   const handleBucket = () => {
     if (ballRef.current) {
@@ -62,7 +62,25 @@ export const Experience = () => {
     <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRef} initialPosition={basketInitialPosition} onBucket={handleBucket} />
       <Ball ballRef={ballRef} initialPosition={ballInitialPosition} />
-      <ShootingPlane position={ballInitialPosition} onShoot={handleShoot} />
+      <ShootingPlane
+        position={ballInitialPosition}
+        onPointerDown={(pointerDirection) => {
+          if (!isShooting) {
+            displayArrow(pointerDirection)
+          }
+        }}
+        onPointerMove={(pointerDirection) => {
+          if (!isShooting) {
+            moveArrow(pointerDirection)
+          }
+        }}
+        onPointerUp={(pointerDirection) => {
+          hideArrow()
+          if (!isShooting) {
+            shootBall(pointerDirection)
+          }
+        }} />
+      <ShootingArrow arrowRef={arrowRef} position={ballInitialPosition} />
     </Physics>
   </>
 }
