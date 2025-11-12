@@ -5,6 +5,7 @@ type Phase = "ready" | "playing" | "ended"
 interface GameState {
   phase: Phase,
   score: number,
+  bestScore?: number,
   isShooting: boolean,
   lastBucketTime: number,
   currentTime: number,
@@ -13,6 +14,7 @@ interface GameState {
   scoreBucket: () => void
   updateCurrentTime: () => void
   setIsShooting: (value: boolean) => void
+  setBestScore: (value: number) => void
 }
 
 export const useGameState = create<GameState>((set) => ({
@@ -25,5 +27,6 @@ export const useGameState = create<GameState>((set) => ({
   endGame: () => set(() => ({ phase: 'ended', isShooting: false })),
   scoreBucket: () => set((state) => ({ score: state.score + 1, lastBucketTime: Date.now() })),
   updateCurrentTime: () => set(() => ({ currentTime: Date.now() })),
-  setIsShooting: (value: boolean) => set(() => ({ isShooting: value }))
+  setIsShooting: (value: boolean) => set(() => ({ isShooting: value })),
+  setBestScore: (value: number) => set(() => ({ bestScore: value }))
 }))

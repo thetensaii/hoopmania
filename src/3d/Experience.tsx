@@ -12,6 +12,7 @@ import { ballInitialPosition, useBallActions } from "../hooks/3d/useBallActions"
 import { ShootingArrow } from "./ShootingArrow"
 import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
 import { useIsGamePlaying } from "../hooks/useIsGamePlaying"
+import { useEndGameFn } from "../hooks/useEndGameFn"
 
 const basketInitialPosition = new Vector3(0, -0.6, 6)
 
@@ -22,10 +23,10 @@ export const Experience = () => {
   const arrowRef = useRef<Mesh>(null)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
-  const endGame = useGameState((state) => state.endGame)
   const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
   const { resetBallPosition, shootBall } = useBallActions(ballRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: ballInitialPosition })
+  const endGameFn = useEndGameFn()
 
   const isGamePlaying = useIsGamePlaying()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
@@ -41,7 +42,7 @@ export const Experience = () => {
       if (getTimeLeftInSec(lastBucketTime, currentTime) > 0 || isShooting) {
         updateCurrentTime()
       } else {
-        endGame()
+        endGameFn()
       }
 
       if (basketRef.current) {
