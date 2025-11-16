@@ -5,12 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@gsap/react':
+    specifier: ^2.1.2
+    version: 2.1.2(gsap@3.13.0)(react@19.1.0)
   '@react-three/fiber':
     specifier: ^9.2.0
     version: 9.2.0(@types/react@19.1.8)(react-dom@19.1.0)(react@19.1.0)(three@0.178.0)
   '@react-three/rapier':
     specifier: ^2.1.0
     version: 2.1.0(@react-three/fiber@9.2.0)(react@19.1.0)(three@0.178.0)
+  gsap:
+    specifier: ^3.13.0
+    version: 3.13.0
   react:
     specifier: ^19.1.0
     version: 19.1.0
@@ -61,6 +67,9 @@ devDependencies:
   vite:
     specifier: ^7.0.4
     version: 7.0.5
+  vite-plugin-glsl:
+    specifier: ^1.5.4
+    version: 1.5.4(vite@7.0.5)
 
 packages:
 
@@ -567,6 +576,16 @@ packages:
       '@eslint/core': 0.15.1
       levn: 0.4.1
     dev: true
+
+  /@gsap/react@2.1.2(gsap@3.13.0)(react@19.1.0):
+    resolution: {integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==}
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
+    dependencies:
+      gsap: 3.13.0
+      react: 19.1.0
+    dev: false
 
   /@humanfs/core@0.19.1:
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1552,6 +1571,10 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
+    dev: false
+
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -2054,6 +2077,22 @@ packages:
     dependencies:
       react: 19.1.0
     dev: false
+
+  /vite-plugin-glsl@1.5.4(vite@7.0.5):
+    resolution: {integrity: sha512-EUmwL+IDK+dGDAlaKm89++k8aJ4qmHjLQxrngww3GLOOAQ4aZ48o9YR1ie7XPe08iDWlG+9Uh5V7oiZcXTUbyA==}
+    engines: {node: '>= 20.17.0', npm: '>= 10.8.3'}
+    peerDependencies:
+      '@rollup/pluginutils': ^5.x
+      esbuild: '>= 0.25'
+      vite: '>= 3.x'
+    peerDependenciesMeta:
+      '@rollup/pluginutils':
+        optional: true
+      esbuild:
+        optional: true
+    dependencies:
+      vite: 7.0.5
+    dev: true
 
   /vite@7.0.5:
     resolution: {integrity: sha512-1mncVwJxy2C9ThLwz0+2GKZyEXuC3MyWtAAlNftlZZXZDP3AJt5FmwcMit/IGGaNZ8ZOB2BNO/HFUB+CpN0NQw==}

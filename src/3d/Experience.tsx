@@ -11,8 +11,10 @@ import { getTimeLeftInSec } from "../utils"
 import { ballInitialPosition, useBallActions } from "../hooks/3d/useBallActions"
 import { ShootingArrow } from "./ShootingArrow"
 import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
-import { useIsGamePlaying } from "../hooks/useIsGamePlaying"
 import { useEndGameFn } from "../hooks/useEndGameFn"
+import { useGamePhase } from "../hooks/useGamePhase"
+import { Fireworks } from "./Fireworks"
+import { useFireworksState } from "../FireworksState"
 
 const basketInitialPosition = new Vector3(0, -0.6, 6)
 
@@ -27,8 +29,10 @@ export const Experience = () => {
   const { resetBallPosition, shootBall } = useBallActions(ballRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: ballInitialPosition })
   const endGameFn = useEndGameFn()
+  const createFirework = useFireworksState((state) => state.createFirework)
 
-  const isGamePlaying = useIsGamePlaying()
+
+  const { isGamePlaying } = useGamePhase()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const currentTime = useGameState((state) => state.currentTime)
   const isShooting = useGameState((state) => state.isShooting)
@@ -55,6 +59,10 @@ export const Experience = () => {
     if (ballRef.current) {
       resetBallPosition()
       scoreBucket()
+      if (basketRef.current) {
+        const { x, y, z } = basketRef.current.translation()
+        createFirework(new Vector3(x, y, z))
+      }
     }
   }
 
@@ -83,6 +91,7 @@ export const Experience = () => {
           }
         }} />
       <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={ballInitialPosition} />
+      {isGamePlaying && <Fireworks />}
     </Physics>
   </>
 }
