@@ -18,6 +18,9 @@ type Props = {
 export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Props) => {
   const materialRef = useRef<RawShaderMaterial>(null)
   const { positionsArray, sizesArray, timeMultipliersArray } = useMemo(() => createFireworkAttributes(200 + Math.floor(200 * Math.random())), [])
+  const color = useMemo(() => {
+    return new Color().setHSL(Math.random(), 1, 0.7)
+  }, [])
   const size = useThree((state) => state.size)
 
   useGSAP(() => {
@@ -44,7 +47,7 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
         <uniform attach="uniforms-uSize" value={0.7} />
         <uniform attach="uniforms-uResolution" value={new Vector2(size.width * window.devicePixelRatio, size.height * window.devicePixelRatio)} />
         <uniform attach="uniforms-uTexture" value={texture} />
-        <uniform attach="uniforms-uColor" value={new Color('red')} />
+        <uniform attach="uniforms-uColor" value={color} />
       </rawShaderMaterial>
     </points>
   )
