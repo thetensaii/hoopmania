@@ -1,11 +1,11 @@
-import { SRGBColorSpace, TextureLoader } from "three"
+import { SRGBColorSpace } from "three"
 import { useFireworksState } from "../FireworksState"
 import { Firework } from "./Firework/Firework"
-import { useLoader } from "@react-three/fiber"
+import { useTexture } from "@react-three/drei"
 
 export const Fireworks = () => {
   const { fireworks } = useFireworksState()
-  const fireworkTexture = useLoader(TextureLoader, './particles/firework.png')
+  const fireworkTexture = useTexture('./particles/firework.png')
   fireworkTexture.colorSpace = SRGBColorSpace
 
   return (

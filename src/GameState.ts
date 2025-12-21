@@ -7,12 +7,11 @@ interface GameState {
   score: number,
   bestScore?: number,
   isShooting: boolean,
+  startTime: number,
   lastBucketTime: number,
-  currentTime: number,
   endGame: () => void
   startNewGame: () => void
   scoreBucket: () => void
-  updateCurrentTime: () => void
   setIsShooting: (value: boolean) => void
   setBestScore: (value: number) => void
 }
@@ -21,12 +20,11 @@ export const useGameState = create<GameState>((set) => ({
   phase: "ready",
   score: 0,
   isShooting: false,
+  startTime: Date.now(),
   lastBucketTime: Date.now(),
-  currentTime: Date.now(),
-  startNewGame: () => set(() => ({ phase: 'playing', score: 0, isShooting: false, lastBucketTime: Date.now(), currentTime: Date.now() })),
+  startNewGame: () => set(() => ({ phase: 'playing', score: 0, isShooting: false, startTime: Date.now(), lastBucketTime: Date.now() })),
   endGame: () => set(() => ({ phase: 'ended', isShooting: false })),
   scoreBucket: () => set((state) => ({ score: state.score + 1, lastBucketTime: Date.now() })),
-  updateCurrentTime: () => set(() => ({ currentTime: Date.now() })),
   setIsShooting: (value: boolean) => set(() => ({ isShooting: value })),
   setBestScore: (value: number) => set(() => ({ bestScore: value }))
 }))

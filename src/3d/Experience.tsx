@@ -8,15 +8,14 @@ import { useGameState } from "../GameState"
 import { Group, Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { getTimeLeftInSec } from "../utils"
-import { ballInitialPosition, useBallActions } from "../hooks/3d/useBallActions"
+import { BALL_INITIAL_POS, useBallActions } from "../hooks/3d/useBallActions"
 import { ShootingArrow } from "./ShootingArrow"
 import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
 import { useEndGameFn } from "../hooks/useEndGameFn"
 import { useGamePhase } from "../hooks/useGamePhase"
 import { Fireworks } from "./Fireworks"
 import { useFireworksState } from "../FireworksState"
-
-const basketInitialPosition = new Vector3(0, -0.6, 6)
+import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
@@ -25,32 +24,24 @@ export const Experience = () => {
   const arrowRef = useRef<Mesh>(null)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
-  const updateCurrentTime = useGameState((state) => state.updateCurrentTime)
   const { resetBallPosition, shootBall } = useBallActions(ballRef)
-  const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: ballInitialPosition })
+  const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
   const endGameFn = useEndGameFn()
   const createFirework = useFireworksState((state) => state.createFirework)
 
 
   const { isGamePlaying } = useGamePhase()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
-  const currentTime = useGameState((state) => state.currentTime)
   const isShooting = useGameState((state) => state.isShooting)
 
   const camera = useThree((state) => state.camera)
   camera.position.z = 0
   camera.rotation.y = Math.PI
 
-  useFrame((state) => {
+  useFrame(() => {
     if (isGamePlaying) {
-      if (getTimeLeftInSec(lastBucketTime, currentTime) > 0 || isShooting) {
-        updateCurrentTime()
-      } else {
+      if (getTimeLeftInSec(lastBucketTime, Date.now()) < 0 && !isShooting) {
         endGameFn()
-      }
-
-      if (basketRef.current) {
-        basketRef.current.setNextKinematicTranslation({ x: 1.5 * Math.sin(state.clock.getElapsedTime()), y: basketInitialPosition.y, z: basketInitialPosition.z });
       }
     }
   })
@@ -70,10 +61,10 @@ export const Experience = () => {
     <color args={['#bdedfc']} attach="background" />
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
-      <Basket ref={basketRef} initialPosition={basketInitialPosition} onBucket={handleBucket} />
-      <Ball ballRef={ballRef} initialPosition={ballInitialPosition} />
+      <Basket ref={basketRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} />
+      <Ball ballRef={ballRef} initialPosition={BALL_INITIAL_POS} />
       <ShootingPlane
-        position={ballInitialPosition}
+        position={BALL_INITIAL_POS}
         onPointerDown={(pointerDirection) => {
           if (!isShooting) {
             displayArrow(pointerDirection)
@@ -90,7 +81,7 @@ export const Experience = () => {
             shootBall(pointerDirection)
           }
         }} />
-      <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={ballInitialPosition} />
+      <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={BALL_INITIAL_POS} />
       {isGamePlaying && <Fireworks />}
     </Physics>
   </>

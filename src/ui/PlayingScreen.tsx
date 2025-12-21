@@ -1,12 +1,21 @@
+import { useEffect, useState } from "react"
 import { useGameState } from "../GameState"
 import { getTimeLeftInSec } from "../utils"
 
 export const PlayingScreen = () => {
   const score = useGameState((state) => state.score)
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
-  const currentTime = useGameState((state) => state.currentTime)
+  const [timeLeft, setTimeLeft] = useState<number>(0)
 
-  const timeLeft = Math.max(0, getTimeLeftInSec(lastBucketTime, currentTime))
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimeLeft(Math.max(0, getTimeLeftInSec(lastBucketTime, Date.now())))
+    }, 10)
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [lastBucketTime])
 
   return (
     <>

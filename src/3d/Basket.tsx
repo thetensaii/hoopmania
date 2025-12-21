@@ -1,6 +1,7 @@
 import { CuboidCollider, RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { type RefObject } from "react";
 import { DoubleSide, Vector3 } from "three";
+import { useBasketActions } from "../hooks/3d/useBasketActions";
 
 const basketDiameter_M = 0.07
 const backboardLength_M = 0.183
@@ -13,6 +14,8 @@ type BasketProps = {
 }
 
 export const Basket = ({ ref, initialPosition, onBucket }: BasketProps) => {
+  useBasketActions(ref)
+
   const handleBucket = () => {
     onBucket()
   }
