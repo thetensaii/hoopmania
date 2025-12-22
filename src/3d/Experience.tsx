@@ -18,6 +18,8 @@ import { useFireworksState } from "../FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload } from '@react-three/drei';
 
+const bucketAudio = new Audio('./swish2.mp3')
+
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
   const ballRef = useRef<RapierRigidBody>(null)
@@ -51,6 +53,8 @@ export const Experience = () => {
     if (ballRef.current) {
       resetBallPosition()
       scoreBucket()
+      bucketAudio.currentTime = 0
+      bucketAudio.play()
       if (basketRef.current) {
         const { x, y, z } = basketRef.current.translation()
         createFirework(new Vector3(x, y, z))
