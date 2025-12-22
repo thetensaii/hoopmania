@@ -16,6 +16,7 @@ import { useGamePhase } from "../hooks/useGamePhase"
 import { Fireworks } from "./Fireworks"
 import { useFireworksState } from "../FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
+import { Preload } from '@react-three/drei';
 
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
@@ -58,6 +59,7 @@ export const Experience = () => {
   }
 
   return <>
+    <Preload all />
     <color args={['#bdedfc']} attach="background" />
     <Lights />
     <Physics debug={!import.meta.env.PROD}>

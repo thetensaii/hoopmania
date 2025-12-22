@@ -3,9 +3,6 @@ import { useFireworksState } from "../FireworksState"
 import { Firework } from "./Firework/Firework"
 import { useTexture } from "@react-three/drei"
 
-
-useTexture.preload('./particles/firework.png');
-
 export const Fireworks = () => {
   const { fireworks } = useFireworksState()
   const fireworkTexture = useTexture('./particles/firework.png')
