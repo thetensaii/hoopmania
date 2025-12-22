@@ -18,7 +18,7 @@ import { useFireworksState } from "../FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload } from '@react-three/drei';
 
-const bucketAudio = new Audio('./swish2.mp3')
+const bucketAudio = new Audio('./swish.mp3')
 
 export const Experience = () => {
   const basketRef = useRef<RapierRigidBody>(null)
