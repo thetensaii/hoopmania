@@ -37,6 +37,7 @@
     "vite": "^7.0.4",
     "vite-plugin-glsl": "^1.5.4"
   },
+  "//": "https://github.com/chakra-ui/panda/issues/3446",
   "pnpm": {
     "overrides": {
       "@pandacss/node>package-manager-detector": "^0.2.11",
