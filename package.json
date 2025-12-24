@@ -36,5 +36,12 @@
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4",
     "vite-plugin-glsl": "^1.5.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "@pandacss/node>package-manager-detector": "^0.2.11",
+      "@pandacss/node>quansync": "^0.2.11",
+      "package-manager-detector": "^0.2.11"
+    }
   }
 }
