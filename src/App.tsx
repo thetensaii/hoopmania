@@ -18,7 +18,7 @@ function App() {
   }, [loadBestScore])
 
   return (
-    <div className={css({ w: 'screen', h: 'screen' })}>
+    <div className={css({ h: 'screen', touchAction: 'none' })}>
       <Canvas>
         <Experience />
       </Canvas>
