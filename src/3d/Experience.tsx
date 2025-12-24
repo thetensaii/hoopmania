@@ -17,6 +17,7 @@ import { Fireworks } from "./Fireworks"
 import { useFireworksState } from "../FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload } from '@react-three/drei';
+import { token } from "../../styled-system/tokens"
 
 const bucketAudio = new Audio('./swish.mp3')
 
@@ -64,7 +65,7 @@ export const Experience = () => {
 
   return <>
     <Preload all />
-    <color args={['#bdedfc']} attach="background" />
+    <color args={[token('colors.blue.500')]} attach="background" />
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} />

@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { createFireworkAttributes } from "./CreateFireworkAttributes"
 import { Html } from "@react-three/drei"
+import { css } from "../../../styled-system/css"
 
 type Props = {
   position: Vector3
@@ -55,8 +56,8 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
         <uniform attach="uniforms-uColor" value={color} />
       </rawShaderMaterial>
       <group ref={scoreGroupRef}>
-        <Html scale={10}>
-          <div style={{ fontSize: '2rem', transform: 'translateX(-50%)' }}>+1</div>
+        <Html scale={10} center>
+          <div className={css({ fontSize: '2rem' })}>+1</div>
         </Html>
       </group>
     </points>

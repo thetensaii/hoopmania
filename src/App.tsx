@@ -3,6 +3,7 @@ import { Experience } from './3d/Experience'
 import { UI } from './ui/UI'
 import { useEffect } from 'react'
 import { useBestScore } from './hooks/useBestScore'
+import { css } from '../styled-system/css'
 
 let didInit = false
 
@@ -17,7 +18,7 @@ function App() {
   }, [loadBestScore])
 
   return (
-    <div id="canvas-container">
+    <div className={css({ w: 'screen', h: 'screen' })}>
       <Canvas>
         <Experience />
       </Canvas>

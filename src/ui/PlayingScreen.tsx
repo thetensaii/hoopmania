@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useGameState } from "../GameState"
 import { getTimeLeftInSec } from "../utils"
+import { css } from "../../styled-system/css"
 
 export const PlayingScreen = () => {
   const score = useGameState((state) => state.score)
@@ -18,9 +19,9 @@ export const PlayingScreen = () => {
   }, [lastBucketTime])
 
   return (
-    <>
-      <h2 style={{ textAlign: 'center', fontSize: '2rem' }}>Score : {score}</h2>
-      <h2 style={{ textAlign: 'center', fontSize: '2rem', color: timeLeft < 3 ? "red" : "inherit" }}>Timer : {timeLeft.toFixed(2)}</h2>
-    </>
+    <div className={css({ bg: 'darkBlue.500/30' })}>
+      <p className={css({ textAlign: 'center', fontSize: '2rem' })}>Score : {score}</p>
+      <p className={css({ textAlign: 'center', fontSize: '2rem', color: timeLeft < 3 ? "red" : "inherit" })}>Timer : {timeLeft.toFixed(2)}</p>
+    </div>
   )
 }
