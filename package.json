@@ -2,7 +2,8 @@
   "name": "hoopmania",
   "scripts": {
     "webapp:dev": "pnpm --filter webapp dev",
-    "webapp:build": "pnpm --filter webapp build"
+    "webapp:build": "pnpm --filter webapp build",
+    "api:dev": "pnpm --filter api dev"
   },
   "//": "https://github.com/chakra-ui/panda/issues/3446",
   "pnpm": {
