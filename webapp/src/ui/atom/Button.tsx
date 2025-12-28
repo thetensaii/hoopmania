@@ -1,8 +1,6 @@
 import type React from "react"
 import { cva, type RecipeVariant, } from "../../../styled-system/css"
 
-
-
 const button = cva({
   base: {
     borderRadius: '8px',
@@ -61,6 +59,7 @@ const button = cva({
 })
 type ButtonVariants = RecipeVariant<typeof button>
 type Props = {
+  type?: HTMLButtonElement['type']
   onClick?: () => void
   size?: ButtonVariants['size'],
   visual?: ButtonVariants['visual'],
@@ -68,9 +67,9 @@ type Props = {
   children: React.ReactNode
 }
 
-export const Button = ({ onClick, children, size, visual, animation }: Props) => {
+export const Button = ({ type = 'button', onClick, children, size, visual, animation }: Props) => {
   return (
-    <button onClick={onClick} className={button({ size, visual, animation })}>
+    <button type={type} onClick={onClick} className={button({ size, visual, animation })}>
       {children}
     </button>
   )

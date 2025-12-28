@@ -3,6 +3,7 @@ import { usePostGameScreenState } from "../stores/PostGameScreenState"
 import { CenterContainer } from "./atom/CenterContainer"
 import { MainTab } from "./organism/post-game-screen/MainTab"
 import { LeaderboardTab } from "./organism/LeaderboardTab"
+import { ShareScoreTab } from "./organism/post-game-screen/ShareScoreTab"
 
 export const PostGameScreen = () => {
   const tab = usePostGameScreenState((state) => state.tab)
@@ -13,6 +14,8 @@ export const PostGameScreen = () => {
     component = <MainTab />
   } else if (tab === 'leaderboard') {
     component = <LeaderboardTab onBackButtonClick={() => setTab('main')} />
+  } else if (tab === 'shareScore') {
+    component = <ShareScoreTab />
   }
 
   return (
