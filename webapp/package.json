@@ -15,15 +15,18 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.2.0",
     "@react-three/rapier": "^2.1.0",
+    "@tanstack/react-query": "^5.90.12",
     "gsap": "^3.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "three": "^0.178.0",
+    "zod": "^4.2.1",
     "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
     "@pandacss/dev": "^1.7.1",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/three": "^0.178.1",

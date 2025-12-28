@@ -1,5 +1,5 @@
 import { SRGBColorSpace } from "three"
-import { useFireworksState } from "../FireworksState"
+import { useFireworksState } from "../stores/FireworksState"
 import { Firework } from "./Firework/Firework"
 import { useTexture } from "@react-three/drei"
 

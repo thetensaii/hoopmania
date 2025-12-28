@@ -1,8 +1,8 @@
 import { css } from "../../styled-system/css"
 import { useGamePhase } from "../hooks/useGamePhase"
-import { EndingScreen } from "./EndingScreen"
+import { PostGameScreen } from "./PostGameScreen"
 import { PlayingScreen } from "./PlayingScreen"
-import { ReadyScreen } from "./ReadyScreen"
+import { MainScreen } from "./MainScreen"
 
 const style = css({
   position: 'absolute',
@@ -25,7 +25,7 @@ export const UI = () => {
 
   return <div data-active={!isGamePlaying ? "" : undefined} className={style}>
     {isGamePlaying && <PlayingScreen />}
-    {isGameReady && <ReadyScreen />}
-    {isGameEnded && <EndingScreen />}
+    {isGameReady && <MainScreen />}
+    {isGameEnded && <PostGameScreen />}
   </div>
 }

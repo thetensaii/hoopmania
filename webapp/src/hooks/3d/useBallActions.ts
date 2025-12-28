@@ -1,7 +1,7 @@
 import type { RapierRigidBody } from "@react-three/rapier"
 import type { RefObject } from "react"
 import { Vector3 } from "three"
-import { useGameState } from "../../GameState"
+import { useGameState } from "../../stores/GameState"
 import type { PointerDirection } from "./useShootingArrowActions"
 
 export const BALL_INITIAL_POS = new Vector3(0, -1, 2)

@@ -1,4 +1,4 @@
-import { useGameState } from "../GameState"
+import { useGameState } from "../stores/GameState"
 
 const BEST_SCORE_KEY = 'bestScore'
 export const useBestScore = () => {

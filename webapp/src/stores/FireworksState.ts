@@ -1,6 +1,6 @@
 import type { Vector3 } from 'three'
 import { create } from 'zustand'
-import { Firework } from './3d/Firework/Firework'
+import { Firework } from '../3d/Firework/Firework'
 
 type Firework = {
   id: number,

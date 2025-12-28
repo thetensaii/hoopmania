@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useGameState } from "../GameState"
+import { useGameState } from "../stores/GameState"
 import { getTimeLeftInSec } from "../utils"
 import { css } from "../../styled-system/css"
 

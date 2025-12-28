@@ -4,6 +4,7 @@ import { UI } from './ui/UI'
 import { useEffect } from 'react'
 import { useBestScore } from './hooks/useBestScore'
 import { css } from '../styled-system/css'
+import { Providers } from './Providers'
 
 let didInit = false
 
@@ -19,10 +20,12 @@ function App() {
 
   return (
     <div className={css({ h: '100dvh', touchAction: 'none' })}>
-      <Canvas>
-        <Experience />
-      </Canvas>
-      <UI />
+      <Providers>
+        <Canvas>
+          <Experience />
+        </Canvas>
+        <UI />
+      </Providers>
     </div>
   )
 }

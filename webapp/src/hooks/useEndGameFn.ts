@@ -1,4 +1,4 @@
-import { useGameState } from "../GameState"
+import { useGameState } from "../stores/GameState"
 import { useBestScore } from "./useBestScore"
 
 export const useEndGameFn = () => {

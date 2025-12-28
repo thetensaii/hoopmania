@@ -1,4 +1,4 @@
-import { useGameState } from "../GameState"
+import { useGameState } from "../stores/GameState"
 
 export const useGamePhase = () => {
   const phase = useGameState((state) => state.phase)

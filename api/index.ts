@@ -1,22 +1,20 @@
 import Fastify from 'fastify'
+import { buildServer } from './server'
+import { Environment } from './environment'
 
-const fastify = Fastify({
+const server = Fastify({
   logger: true
 })
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' }
-})
+buildServer(server)
 
-/**
- * Run the server!
- */
-const start = async () => {
+const main = async () => {
   try {
-    await fastify.listen({ port: 8080 })
+    await server.listen({ host: Environment.HOST, port: Environment.PORT })
   } catch (err) {
-    fastify.log.error(err)
+    server.log.error(err)
     process.exit(1)
   }
 }
-start()
+
+main()
