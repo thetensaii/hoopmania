@@ -1,14 +1,17 @@
 import Fastify from 'fastify'
 import { buildServer } from './server'
 import { Environment } from './environment'
+import { setupDb } from './database/build'
 
 const server = Fastify({
   logger: true
 })
 
-buildServer(server)
 
 const main = async () => {
+  await setupDb()
+  buildServer(server)
+
   try {
     await server.listen({ host: Environment.HOST, port: Environment.PORT })
   } catch (err) {

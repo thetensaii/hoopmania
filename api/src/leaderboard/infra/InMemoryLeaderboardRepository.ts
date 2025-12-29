@@ -4,7 +4,7 @@ import { Game } from "../domain/Game";
 import { GameRepository } from "../domain/GameRepository";
 
 @injectable()
-export class InMemoryLeaderboardRepository implements LeaderboardRepository {
+export class DbLeaderboardRepository implements LeaderboardRepository {
   constructor(@inject(GameRepository) private readonly gameRepo: GameRepository) {}
 
   public async getLeaders(): Promise<Game[]> {
