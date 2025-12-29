@@ -24,7 +24,7 @@ export class DbGameRepository implements GameRepository {
 
   public async getAll(): Promise<Game[]> {
     const dbGames = await db.selectFrom('game').selectAll().execute()
-    console.log({ dbGames })
+
     return dbGames.map((g) => ({ score: g.score, player: g.player_name, time: g.time }))
   }
 }
