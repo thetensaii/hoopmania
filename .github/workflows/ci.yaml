@@ -1,0 +1,49 @@
+name: CI Pipeline
+
+on: 
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v6
+
+    - name: Install PNPM 8.15
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8.15
+
+    - name: Install Node 22
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22
+        cache: 'pnpm'
+
+    - name: Install Project
+      run: pnpm install
+
+    - name: Build Project
+      run: pnpm run --parallel build
+
+  publish-api-image:
+    needs: build
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and Push API Image
+      uses: docker/build-push-action@v6
+      with:
+        context: ./api
+        push: true
+        tags: hoopmania/api:latest
