@@ -1,0 +1,16 @@
+name: CD Pipeline
+
+on: 
+  workflow_dispatch:
+  workflow_run:
+    workflows: [CI Pipeline]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Coolify
+      run: | 
+        curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
