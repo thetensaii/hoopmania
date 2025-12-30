@@ -50,4 +50,4 @@ jobs:
         context: ./api
         file: ./api/Dockerfile
         push: true
-        tags: ghcr.io/hoopmania/api:latest
+        tags: ghcr.io/${{ github.actor }}/hoopmania-api:latest
