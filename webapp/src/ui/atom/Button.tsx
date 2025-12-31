@@ -6,6 +6,9 @@ const button = cva({
     borderRadius: '8px',
     cursor: 'pointer',
     w: 'full',
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '0.5rem'
   },
   variants: {
     size: {

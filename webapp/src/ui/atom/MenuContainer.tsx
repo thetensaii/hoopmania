@@ -1,7 +1,8 @@
 import type React from "react"
 import { css } from "../../../styled-system/css"
+import type { SystemStyleObject } from "../../../styled-system/types"
 
-const styles = css({
+const menuStyles = css.raw({
   w: '80%',
   maxW: '400px',
   p: '2rem',
@@ -18,13 +19,14 @@ const styles = css({
 })
 
 type Props = {
+  styles?: SystemStyleObject
   children: React.ReactNode
 }
 
-export const MenuContainer = ({ children }: Props) => {
+export const MenuContainer = ({ styles, children }: Props) => {
 
   return (
-    <div className={styles}>
+    <div className={css(menuStyles, styles)}>
       {children}
     </div>
   )
