@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app
 EXPOSE 8080
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]
