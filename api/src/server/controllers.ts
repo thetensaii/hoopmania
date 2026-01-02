@@ -1,5 +1,5 @@
 import { FastifyPluginCallback } from "fastify";
-import { registerLeaderboardControllers } from "../leaderboard/controller";
+import { registerLeaderboardControllers } from "../game/controller";
 import { registerAuthController } from "../auth/controller";
 
 export const registerControllers: FastifyPluginCallback = (fastify) => {

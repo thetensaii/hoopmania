@@ -42,10 +42,10 @@ export const Experience = () => {
   camera.position.z = 0
   camera.rotation.y = Math.PI
 
-  useFrame(() => {
+  useFrame(async () => {
     if (isGamePlaying) {
       if (getTimeLeftInSec(lastBucketTime, Date.now()) < 0 && !isShooting) {
-        endGameFn()
+        await endGameFn()
       }
     }
   })

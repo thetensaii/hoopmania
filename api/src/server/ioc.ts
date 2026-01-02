@@ -1,6 +1,6 @@
 import { Container } from "inversify";
 import fastifyPlugin from 'fastify-plugin'
-import { registerLeaderboardIOC } from "../leaderboard/ioc";
+import { registerLeaderboardIOC } from "../game/ioc";
 export const setupIOC = fastifyPlugin((fastify) => {
   const container = new Container()
   fastify.decorate("container", container)

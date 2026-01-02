@@ -1,22 +1,13 @@
 import { useMutation } from "@tanstack/react-query"
 import type { Game } from "../domain/Game"
+import { useInjection } from "inversify-react"
+import { UnauthenticatedGameService } from "../domain/UnauthenticatedGameService"
 
 export const useShareScore = () => {
+  const unauthenticatedGameService = useInjection<UnauthenticatedGameService>(UnauthenticatedGameService)
   const mutation = useMutation({
     mutationFn: async (game: Game) => {
-      const res = await fetch(new URL('/score', import.meta.env.VITE_API_URL),
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(game)
-        }
-      )
-
-      if (!res.ok) {
-        throw new Error('[useShareScore] - Error when sharing score')
-      }
+      await unauthenticatedGameService.shareGame(game)
     }
   })
 
