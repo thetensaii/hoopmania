@@ -4,6 +4,7 @@ import { type ReactNode } from "react"
 import { MainTab } from "./organism/main-screen/MainTab"
 import { LeaderboardTab } from "./organism/LeaderboardTab"
 import { useMainScreenState } from "../stores/MainScreenState"
+import { LastGamesTab } from "./organism/LastGamesTab"
 
 
 
@@ -16,6 +17,8 @@ export const MainScreen = () => {
     component = <MainTab />
   } else if (tab === 'leaderboard') {
     component = <LeaderboardTab onBackButtonClick={() => setTab('main')} />
+  } else if (tab === 'lastGames') {
+    component = <LastGamesTab onBackButtonClick={() => setTab('main')} />
   }
 
   return (

@@ -23,7 +23,13 @@ export const MainTab = () => {
         </div>
       }
       <Button visual='secondary' onClick={() => setTab('leaderboard')}>Leaderboard</Button>
-      {isConnected ? <Button visual='secondary' onClick={signOut}>Sign Out</Button> : <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo /> Sign in with discord</Button>}
+      {isConnected ?
+        <>
+          <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>
+          <Button visual='secondary' onClick={signOut}>Sign Out</Button>
+        </> :
+        <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo /> Sign in with discord</Button>
+      }
       <Button size='big' animation='pulse' onClick={startNewGame}>PLAY</Button>
     </MenuContainer >
   )

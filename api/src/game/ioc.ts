@@ -1,5 +1,5 @@
 import { FastifyPluginCallback } from "fastify";
-import { DbLeaderboardRepository } from "./infra/InMemoryLeaderboardRepository";
+import { DbLeaderboardRepository } from "./infra/DbLeaderboardRepository";
 import { LeaderboardRepository } from "./domain/LeaderboardRepository";
 import { GameRepository } from "./domain/GameRepository";
 import { DbGameRepository } from "./infra/DbGameRepository";

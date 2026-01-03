@@ -29,6 +29,7 @@ export const MainTab = () => {
         <Button visual='secondary' onClick={() => setTab('shareScore')}>Share my score</Button>
       }
       <Button visual='secondary' onClick={() => setTab('leaderboard')}>Leaderboard</Button>
+      {isConnected && <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>}
       {!isConnected && <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
       <Button size='big' animation='pulse' onClick={handlePlayClick}>PLAY</Button>
     </MenuContainer >

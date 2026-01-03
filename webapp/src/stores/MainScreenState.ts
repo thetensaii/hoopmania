@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type MainScreenTab = 'main' | 'leaderboard'
+type MainScreenTab = 'main' | 'leaderboard' | 'lastGames'
 
 interface MainScreenState {
   tab: MainScreenTab

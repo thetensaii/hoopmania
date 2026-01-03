@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type PostGameScreenTab = 'main' | 'leaderboard' | 'shareScore'
+type PostGameScreenTab = 'main' | 'leaderboard' | 'shareScore' | 'lastGames'
 
 interface PostGameScreenState {
   tab: PostGameScreenTab

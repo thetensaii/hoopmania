@@ -29,4 +29,23 @@ export const GameController: FastifyPluginCallback = (fastify) => {
       await repository.saveUnauthenticated(newGame)
     }
   })
+
+  fastify.get('/game/last', async (req, res) => {
+    const headers = new Headers();
+    Object.entries(req.headers).forEach(([key, value]) => {
+      if (value) headers.append(key, value.toString());
+    });
+    const data = await auth.api.getSession({ headers })
+    const isConnected = !!data?.user
+
+    if (!isConnected) {
+      res.status(401)
+    } else {
+
+      const repository = container.get(GameRepository)
+      const lastGames = await repository.getUserLastGames(data.user.id)
+
+      return { data: lastGames }
+    }
+  })
 }

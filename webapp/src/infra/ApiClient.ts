@@ -4,7 +4,9 @@ import { Environment } from "../environment";
 @injectable()
 export class ApiClient {
   public async get(path: string): Promise<Response> {
-    const res = await fetch(new URL(path, Environment.VITE_API_URL))
+    const res = await fetch(new URL(path, Environment.VITE_API_URL), {
+      credentials: 'include'
+    })
 
     return res
   }

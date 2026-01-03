@@ -56,7 +56,7 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
         <uniform attach="uniforms-uColor" value={color} />
       </rawShaderMaterial>
       <group ref={scoreGroupRef}>
-        <Html scale={10} center>
+        <Html scale={10} center className={css({ pointerEvents: 'none', userSelect: 'none' })}>
           <div className={css({ fontSize: '2rem' })}>+1</div>
         </Html>
       </group>

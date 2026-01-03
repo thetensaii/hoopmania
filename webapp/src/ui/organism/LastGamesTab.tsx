@@ -1,10 +1,10 @@
 import type { ReactNode } from "react"
-import { useGetLeaderboard } from "../../hooks/useGetLeaderboard"
+import { css } from "../../../styled-system/css"
+import { useGetLastGames } from "../../hooks/useGetLastGames"
 import { Button } from "../atom/Button"
 import { MenuContainer } from "../atom/MenuContainer"
 import { Title } from "../atom/Title"
 import { Table } from "../molecule/Table"
-import { css } from "../../../styled-system/css"
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Game } from "../../domain/Game"
 
@@ -12,16 +12,13 @@ type Props = {
   onBackButtonClick: () => void
 }
 
-type Leader = Game & { rank: number }
-
-const columns: ColumnDef<Leader>[] = [
-  { accessorKey: 'rank', header: 'Rank' },
+const columns: ColumnDef<Game>[] = [
   { accessorKey: 'player', header: 'Player' },
   { accessorKey: 'score', header: 'Score' },
 ]
 
-export const LeaderboardTab = ({ onBackButtonClick }: Props) => {
-  const { isPending, isError, data } = useGetLeaderboard()
+export const LastGamesTab = ({ onBackButtonClick }: Props) => {
+  const { isPending, isError, data } = useGetLastGames()
 
   let component: ReactNode = null
   if (isPending) {
@@ -29,14 +26,12 @@ export const LeaderboardTab = ({ onBackButtonClick }: Props) => {
   } else if (isError) {
     component = <p>Une erreur est survenue.</p>
   } else {
-    const leaders: Leader[] = data.map((l, i) => ({ ...l, rank: i + 1 }))
-    component = <Table data={leaders} columns={columns} />
+    component = <Table data={data} columns={columns} />
   }
-
 
   return (
     <MenuContainer>
-      <Title>LEADERBOARD</Title>
+      <Title>LAST GAMES</Title>
       {component}
       <div className={css({ w: 'full', mt: '1rem' })}>
         <Button visual='secondary' onClick={onBackButtonClick}>BACK</Button>

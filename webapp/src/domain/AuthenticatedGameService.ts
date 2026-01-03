@@ -8,4 +8,5 @@ export type AuthenticatedNewGame = z.infer<typeof AuthenticatedNewGame>;
 @injectable()
 export abstract class AuthenticatedGameService {
   public abstract saveGame: (newGame: AuthenticatedNewGame) => Promise<void>
+  public abstract getLastGames: () => Promise<Game[]>
 }
