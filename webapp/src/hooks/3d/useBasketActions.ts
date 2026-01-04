@@ -5,7 +5,7 @@ import { Vector3 } from "three";
 import { useGamePhase } from "../useGamePhase";
 import { useGameState } from "../../stores/GameState";
 
-export const BASKET_INITIAL_POS = new Vector3(0, -0.6, 6)
+export const BASKET_INITIAL_POS = new Vector3(0, -0.6, -6)
 const BASKET_VELOCITY = 0.001
 const BASKET_POS_RANGE = {
   x: {

@@ -32,7 +32,7 @@ export const useShootingArrowActions = ({ arrowGroupRef, arrowRef, ballPosition 
 
   const moveArrow = ({ x, y }: PointerDirection) => {
     if (arrowGroupRef.current && arrowRef.current) {
-      arrowGroupRef.current.lookAt(new Vector3(x, y, 0.3).add(ballPosition))
+      arrowGroupRef.current.lookAt(new Vector3(x, y, -0.3).add(ballPosition))
       if (arrowRef.current.material instanceof MeshBasicMaterial) {
         const alpha = (y - MinYArrowDirection) / (MaxYArrowDirection - MinYArrowDirection)
         arrowRef.current.material.color.lerpColors(DownArrowColor, UpArrowColor, alpha)

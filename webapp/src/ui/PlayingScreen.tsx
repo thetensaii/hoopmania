@@ -4,7 +4,6 @@ import { getTimeLeftInSec } from "../utils"
 import { css } from "../../styled-system/css"
 
 export const PlayingScreen = () => {
-  const score = useGameState((state) => state.score)
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const [timeLeft, setTimeLeft] = useState<number>(0)
 
@@ -20,7 +19,6 @@ export const PlayingScreen = () => {
 
   return (
     <div className={css({ bg: 'darkBlue.500/30' })}>
-      <p className={css({ textAlign: 'center', fontSize: '2rem' })}>Score : {score}</p>
       <p className={css({ textAlign: 'center', fontSize: '2rem', color: timeLeft < 3 ? "red" : "inherit" })}>Timer : {timeLeft.toFixed(2)}</p>
     </div>
   )

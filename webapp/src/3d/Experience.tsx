@@ -22,13 +22,13 @@ import { token } from "../../styled-system/tokens"
 const bucketAudio = new Audio('./swish.mp3')
 
 export const Experience = () => {
-  const basketRef = useRef<RapierRigidBody>(null)
-  const ballRef = useRef<RapierRigidBody>(null)
+  const basketRigidBodyRef = useRef<RapierRigidBody>(null)
+  const ballRigidBodyRef = useRef<RapierRigidBody>(null)
   const arrowGroupRef = useRef<Group>(null)
   const arrowRef = useRef<Mesh>(null)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
-  const { resetBallPosition, shootBall } = useBallActions(ballRef)
+  const { resetBallPosition, shootBall } = useBallActions(ballRigidBodyRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
   const endGameFn = useEndGameFn()
   const createFirework = useFireworksState((state) => state.createFirework)
@@ -37,10 +37,10 @@ export const Experience = () => {
   const { isGamePlaying } = useGamePhase()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const isShooting = useGameState((state) => state.isShooting)
+  const score = useGameState((state) => state.score)
 
   const camera = useThree((state) => state.camera)
   camera.position.z = 0
-  camera.rotation.y = Math.PI
 
   useFrame(async () => {
     if (isGamePlaying) {
@@ -51,13 +51,13 @@ export const Experience = () => {
   })
 
   const handleBucket = () => {
-    if (ballRef.current) {
+    if (ballRigidBodyRef.current) {
       resetBallPosition()
       scoreBucket()
       bucketAudio.currentTime = 0
       bucketAudio.play()
-      if (basketRef.current) {
-        const { x, y, z } = basketRef.current.translation()
+      if (basketRigidBodyRef.current) {
+        const { x, y, z } = basketRigidBodyRef.current.translation()
         createFirework(new Vector3(x, y, z))
       }
     }
@@ -68,8 +68,8 @@ export const Experience = () => {
     <color args={[token('colors.blue.500')]} attach="background" />
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
-      <Basket ref={basketRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} />
-      <Ball ballRef={ballRef} initialPosition={BALL_INITIAL_POS} />
+      <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />
+      <Ball rigidBodyRef={ballRigidBodyRef} initialPosition={BALL_INITIAL_POS} />
       <ShootingPlane
         position={BALL_INITIAL_POS}
         onPointerDown={(pointerDirection) => {

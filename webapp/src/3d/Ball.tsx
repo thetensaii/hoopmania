@@ -7,17 +7,17 @@ import { useBallActions } from "../hooks/3d/useBallActions"
 const ballDiameter_M = 0.05
 
 type BallProps = {
-  ballRef: RefObject<RapierRigidBody | null>
+  rigidBodyRef: RefObject<RapierRigidBody | null>
   initialPosition: Vector3
 }
 
 
-export const Ball = ({ ballRef, initialPosition }: BallProps) => {
-  const { resetBallPosition } = useBallActions(ballRef)
+export const Ball = ({ rigidBodyRef, initialPosition }: BallProps) => {
+  const { resetBallPosition } = useBallActions(rigidBodyRef)
 
   useFrame(() => {
-    if (ballRef.current) {
-      const position = ballRef.current.translation()
+    if (rigidBodyRef.current) {
+      const position = rigidBodyRef.current.translation()
       if (position.y < -2 || position.z > 10) {
         resetBallPosition()
       }
@@ -25,7 +25,7 @@ export const Ball = ({ ballRef, initialPosition }: BallProps) => {
   })
 
   return (
-    <RigidBody ref={ballRef} colliders="ball" position={initialPosition} lockTranslations >
+    <RigidBody ref={rigidBodyRef} colliders="ball" position={initialPosition} lockTranslations>
       <mesh>
         <sphereGeometry args={[ballDiameter_M * 10 / 2]} />
         <meshStandardMaterial color="#F88158" />
