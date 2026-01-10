@@ -33,7 +33,7 @@ export const LastGamesTab = ({ onBackButtonClick }: Props) => {
     <MenuContainer>
       <Title>LAST GAMES</Title>
       {component}
-      <div className={css({ w: 'full', mt: '1rem' })}>
+      <div className={css({ w: 'full', mt: '[1rem]' })}>
         <Button visual='secondary' onClick={onBackButtonClick}>BACK</Button>
       </div>
     </MenuContainer>

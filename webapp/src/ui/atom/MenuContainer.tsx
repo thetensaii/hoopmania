@@ -3,8 +3,8 @@ import { css } from "../../../styled-system/css"
 import type { SystemStyleObject } from "../../../styled-system/types"
 
 const menuStyles = css.raw({
-  w: '80%',
-  maxW: '400px',
+  w: '[80%]',
+  maxW: '[400px]',
   p: '2rem',
 
   bg: 'blue.500',

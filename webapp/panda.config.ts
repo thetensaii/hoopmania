@@ -10,12 +10,19 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
   presets: [],
+  strictTokens: true,
   globalCss: {
     html: {
       color: 'white'
     }
   },
-  // Useful for theme customization
+  globalVars: {
+    '--timer-angle': {
+      syntax: '<angle>',
+      inherits: false,
+      initialValue: '300deg'
+    }
+  },
   theme: {
     extend: {
       tokens: {
@@ -93,8 +100,8 @@ export default defineConfig({
       },
       keyframes: {
         pulse: {
-          "0%, 100%": { transform: "scale(1) rotate(-5deg)" },
-          "50%": { transform: "scale(1.1) rotate(5deg)" }
+          "0%, 100%": { transform: "scale(0.9) rotate(-5deg)" },
+          "50%": { transform: "scale(1) rotate(5deg)" }
         }
       },
     },

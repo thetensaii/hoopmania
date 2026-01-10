@@ -48,7 +48,7 @@ export const Basket = ({ ref, initialPosition, onBucket, score }: BasketProps) =
           transform
           occlude='blending'
           wrapperClass={css({
-            bg: '#A9A9A9',
+            bg: '[#A9A9A9]',
             pointerEvents: 'none',
             userSelect: 'none',
           })}

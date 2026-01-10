@@ -9,7 +9,7 @@ export const Title = ({ children }: Props) => {
   return (
 
     <h1 className={css({
-      mb: '1rem',
+      mb: '[1rem]',
       fontSize: '2.5rem',
       fontWeight: 'bolder',
       color: 'white',

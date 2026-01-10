@@ -40,7 +40,7 @@ export const ShareScoreTab = () => {
         <Logo />
         <p className={css({ textAlign: 'center', fontSize: "2rem" })}>Score : {score}</p>
         <Input name="name" label="Enter your name" defaultValue={playerName} />
-        <div className={css({ w: 'full', mt: '1.5rem', display: "flex", gap: '1rem' })}>
+        <div className={css({ w: 'full', mt: '[1.5rem]', display: "flex", gap: '1rem' })}>
           <Button visual='secondary' size='medium' onClick={() => setTab('main')}>BACK</Button>
           <Button type='submit' visual='primary'>Share</Button>
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useGameState } from "../stores/GameState"
 import { getTimeLeftInSec } from "../utils"
 import { css } from "../../styled-system/css"
+import { ClockIcon } from "./atom/icons/ClockIcon"
 
 export const PlayingScreen = () => {
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
@@ -18,8 +19,13 @@ export const PlayingScreen = () => {
   }, [lastBucketTime])
 
   return (
-    <div className={css({ bg: 'darkBlue.500/30' })}>
-      <p className={css({ textAlign: 'center', fontSize: '2rem', color: timeLeft < 3 ? "red" : "inherit" })}>Timer : {timeLeft.toFixed(2)}</p>
-    </div>
+    <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', bg: 'darkBlue.500/30' })}>
+      <ClockIcon fillPercent={timeLeft / 10 * 100} />
+      <p className={css({
+        textAlign: 'center', fontSize: '2rem', color: 'white'
+      })}>
+        {timeLeft.toFixed(2)}
+      </p>
+    </div >
   )
 }

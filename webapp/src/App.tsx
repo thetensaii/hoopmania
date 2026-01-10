@@ -22,7 +22,7 @@ function App() {
   }, [loadBestScore, loadPlayerName])
 
   return (
-    <div className={css({ h: '100dvh', touchAction: 'none' })}>
+    <div className={css({ h: '[100dvh]', touchAction: 'none' })}>
       <Providers>
         <Canvas>
           <Experience />
