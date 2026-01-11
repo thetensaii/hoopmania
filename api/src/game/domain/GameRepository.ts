@@ -12,4 +12,5 @@ export abstract class GameRepository {
   public abstract saveAuthenticated: (user: User, game: AuthenticatedNewGame) => Promise<void>
   public abstract getAll: () => Promise<Game[]>
   public abstract getUserLastGames: (userId: string) => Promise<Game[]>
+  public abstract getUserBestGame: (userId: string) => Promise<Game | null>
 }

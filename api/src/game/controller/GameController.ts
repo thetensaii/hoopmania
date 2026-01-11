@@ -48,4 +48,23 @@ export const GameController: FastifyPluginCallback = (fastify) => {
       return { data: lastGames }
     }
   })
+
+  fastify.get('/game/best', async (req, res) => {
+    const headers = new Headers();
+    Object.entries(req.headers).forEach(([key, value]) => {
+      if (value) headers.append(key, value.toString());
+    });
+    const data = await auth.api.getSession({ headers })
+    const isConnected = !!data?.user
+
+    if (!isConnected) {
+      res.status(401)
+    } else {
+
+      const repository = container.get(GameRepository)
+      const bestGame = await repository.getUserBestGame(data.user.id)
+
+      return { data: bestGame }
+    }
+  })
 }

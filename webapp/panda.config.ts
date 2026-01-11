@@ -102,6 +102,10 @@ export default defineConfig({
         pulse: {
           "0%, 100%": { transform: "scale(0.9) rotate(-5deg)" },
           "50%": { transform: "scale(1) rotate(5deg)" }
+        },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
         }
       },
     },

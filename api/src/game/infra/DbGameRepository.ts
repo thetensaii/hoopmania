@@ -47,4 +47,10 @@ export class DbGameRepository implements GameRepository {
 
     return dbGames.map((g) => ({ score: g.score, player: g.userName ?? '', time: g.time })).slice(0, 9)
   }
+
+  public async getUserBestGame(userId: string): Promise<Game | null> {
+    const bestGame = await db.selectFrom('game').leftJoin('user', 'user.id', 'game.user_id').where('user.id', '=', userId).select(['score', 'time', 'user.name as userName']).orderBy('game.score', 'desc').executeTakeFirst()
+
+    return bestGame ? { score: bestGame.score, player: bestGame.userName ?? '', time: bestGame.time } : null
+  }
 }
