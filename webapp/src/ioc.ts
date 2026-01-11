@@ -10,6 +10,8 @@ import { AuthenticatedBestScoreService } from "./domain/AuthenticatedBestScoreSe
 import { ApiAuthenticatedBestScoreService } from "./infra/ApiAuthenticatedBestScoreService";
 import { UnauthenticatedBestScoreService } from "./domain/UnauthenticatedBestScoreService";
 import { LocalUnauthenticatedBestScoreService } from "./infra/LocalUnauthenticatedBestScoreService";
+import { LocalUnauthenticatedPlayerNameService } from "./infra/LocalUnauthenticatedPlayerNameService";
+import { UnauthenticatedPlayerNameService } from "./domain/UnauthenticatedPlayerNameService";
 
 const container = new Container()
 container.bind(ApiClient).toSelf().inSingletonScope()
@@ -23,5 +25,7 @@ container.bind(ApiAuthenticatedBestScoreService).toSelf().inSingletonScope()
 container.bind(AuthenticatedBestScoreService).to(ApiAuthenticatedBestScoreService)
 container.bind(LocalUnauthenticatedBestScoreService).toSelf().inSingletonScope()
 container.bind(UnauthenticatedBestScoreService).to(LocalUnauthenticatedBestScoreService)
+container.bind(LocalUnauthenticatedPlayerNameService).toSelf().inSingletonScope()
+container.bind(UnauthenticatedPlayerNameService).to(LocalUnauthenticatedPlayerNameService)
 
 export { container }

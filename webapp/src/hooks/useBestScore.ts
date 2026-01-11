@@ -20,7 +20,8 @@ export const useBestScore = () => {
 
   const loadBestScore = async (isConnected: boolean) => {
     const bestScore = await queryClient.fetchQuery({
-      queryKey: ['bestGame'], queryFn: async () => {
+      queryKey: ['bestScore'],
+      queryFn: async () => {
         if (isConnected) return authenticatedBestScoreService.findBestScore()
         return unauthenticatedBestScoreService.findBestScore()
       }
@@ -32,10 +33,10 @@ export const useBestScore = () => {
   }
 
   const saveBestScore = async (newBestScore: number) => {
-    setBestScore(newBestScore)
     if (!isConnected) {
       await saveBestScoreMutation.mutateAsync(newBestScore)
     }
+    setBestScore(newBestScore)
   }
 
   return { loadBestScore, saveBestScore }

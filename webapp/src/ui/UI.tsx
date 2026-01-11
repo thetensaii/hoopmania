@@ -43,7 +43,7 @@ export const UI = () => {
         didInit = true
         const isConnected = !!result.data.data?.user
         await loadBestScore(isConnected)
-        loadPlayerName()
+        await loadPlayerName(isConnected)
 
       })()
   }, [loadBestScore, loadPlayerName, result.isLoading, result.data])

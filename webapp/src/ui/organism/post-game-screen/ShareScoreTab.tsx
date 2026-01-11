@@ -29,7 +29,7 @@ export const ShareScoreTab = () => {
     const game = { player, score, time }
 
     await mutation.mutateAsync(game)
-    savePlayerName(player)
+    await savePlayerName(player)
     setHasSharedScore(true)
     setTab('main')
   }

@@ -11,9 +11,7 @@ export class LocalUnauthenticatedBestScoreService implements UnauthenticatedBest
     return bestScore ? Number(bestScore) : null
   }
 
-  public async saveBestScore(newBestScore: number): Promise<number> {
+  public async saveBestScore(newBestScore: number): Promise<void> {
     window.localStorage.setItem(BEST_SCORE_KEY, String(newBestScore))
-
-    return newBestScore
   }
 }
