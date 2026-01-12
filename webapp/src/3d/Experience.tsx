@@ -1,14 +1,14 @@
-import { useFrame, useThree } from "@react-three/fiber"
+import { useThree } from "@react-three/fiber"
 import { Ball } from "./Ball"
 import { Basket } from "./Basket"
 import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useGameState } from "../stores/GameState"
 import { Group, Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { getTimeLeftInSec } from "../utils"
-import { BALL_INITIAL_POS, useBallActions } from "../hooks/3d/useBallActions"
+import { BALL_INITIAL_POS, resetBallPosition, shootBall } from "./utils/ballActionsFunctions"
 import { ShootingArrow } from "./ShootingArrow"
 import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
 import { useEndGameFn } from "../hooks/useEndGameFn"
@@ -18,6 +18,7 @@ import { useFireworksState } from "../stores/FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload } from '@react-three/drei';
 import { token } from "../../styled-system/tokens"
+import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 
 const bucketAudio = new Audio('./swish.mp3')
 
@@ -26,33 +27,33 @@ export const Experience = () => {
   const ballRigidBodyRef = useRef<RapierRigidBody>(null)
   const arrowGroupRef = useRef<Group>(null)
   const arrowRef = useRef<Mesh>(null)
+  const isShootingRef = useRef<boolean>(false)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
-  const { resetBallPosition, shootBall } = useBallActions(ballRigidBodyRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
   const endGameFn = useEndGameFn()
   const createFirework = useFireworksState((state) => state.createFirework)
 
-
   const { isGamePlaying } = useGamePhase()
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
-  const isShooting = useGameState((state) => state.isShooting)
   const score = useGameState((state) => state.score)
 
   const camera = useThree((state) => state.camera)
   camera.position.z = 0
 
-  useFrame(async () => {
-    if (isGamePlaying) {
-      if (getTimeLeftInSec(lastBucketTime, Date.now()) < 0 && !isShooting) {
+  useEffect(() => {
+    const intervalId = setIntervalAsync(async () => {
+      if (isGamePlaying && getTimeLeftInSec(lastBucketTime, Date.now()) < 0 && !isShootingRef.current) {
         await endGameFn()
       }
-    }
-  })
+    }, 200)
+
+    return () => { (async () => await clearIntervalAsync(intervalId))() }
+  }, [isGamePlaying, lastBucketTime, endGameFn])
 
   const handleBucket = () => {
     if (ballRigidBodyRef.current) {
-      resetBallPosition()
+      resetBallPosition(ballRigidBodyRef, isShootingRef)
       scoreBucket()
       bucketAudio.currentTime = 0
       bucketAudio.play()
@@ -69,23 +70,23 @@ export const Experience = () => {
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />
-      <Ball rigidBodyRef={ballRigidBodyRef} initialPosition={BALL_INITIAL_POS} />
+      <Ball rigidBodyRef={ballRigidBodyRef} isShootingRef={isShootingRef} initialPosition={BALL_INITIAL_POS} />
       <ShootingPlane
         position={BALL_INITIAL_POS}
         onPointerDown={(pointerDirection) => {
-          if (!isShooting) {
+          if (!isShootingRef.current) {
             displayArrow(pointerDirection)
           }
         }}
         onPointerMove={(pointerDirection) => {
-          if (!isShooting) {
+          if (!isShootingRef.current) {
             moveArrow(pointerDirection)
           }
         }}
         onPointerUp={(pointerDirection) => {
           hideArrow()
-          if (!isShooting) {
-            shootBall(pointerDirection)
+          if (!isShootingRef.current && getTimeLeftInSec(lastBucketTime, Date.now()) > 0) {
+            shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
           }
         }} />
       <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={BALL_INITIAL_POS} />
