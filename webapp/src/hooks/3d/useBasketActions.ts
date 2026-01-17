@@ -1,11 +1,10 @@
-import { useFrame } from "@react-three/fiber";
-import type { RapierRigidBody } from "@react-three/rapier";
+import { useBeforePhysicsStep, type RapierRigidBody } from "@react-three/rapier";
 import { useRef, type RefObject } from "react";
 import { Vector3 } from "three";
 import { useGamePhase } from "../useGamePhase";
 
 export const BASKET_INITIAL_POS = new Vector3(0, -0.6, -6)
-const BASKET_VELOCITY = 3
+const BASKET_VELOCITY = 0.02
 const BASKET_POS_RANGE = {
   x: {
     min: -1.5,
@@ -21,9 +20,9 @@ export const useBasketActions = (basketRef: RefObject<RapierRigidBody | null>) =
   const { isGamePlaying } = useGamePhase()
   const targetRef = useRef<Vector3>(computeNextBasketTarget())
 
-  useFrame((_state, delta) => {
+  useBeforePhysicsStep(() => {
     if (isGamePlaying) {
-      moveBasket(delta)
+      moveBasket()
 
       if (!basketRef.current) return
       const currentPos = basketRef.current.translation()
@@ -33,10 +32,11 @@ export const useBasketActions = (basketRef: RefObject<RapierRigidBody | null>) =
     }
   })
 
-  const moveBasket = (delta: number): void => {
+  const moveBasket = (): void => {
     if (basketRef.current) {
       const currentPos = basketRef.current.translation()
-      const movement = targetRef.current.clone().sub(currentPos).normalize().multiplyScalar(delta * BASKET_VELOCITY)
+      const direction = targetRef.current.clone().sub(currentPos).normalize()
+      const movement = direction.multiplyScalar(BASKET_VELOCITY)
       const newPos = movement.add(currentPos)
 
       basketRef.current.setNextKinematicTranslation({ x: newPos.x, y: newPos.y, z: newPos.z });
