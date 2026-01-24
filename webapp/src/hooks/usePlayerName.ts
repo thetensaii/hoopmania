@@ -1,16 +1,16 @@
 import { useInjection } from "inversify-react"
 import { useGameState } from "../stores/GameState"
-import { UnauthenticatedPlayerNameService } from "../domain/UnauthenticatedPlayerNameService"
+import { GuestPlayerNameService } from "../domain/GuestPlayerNameService"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const usePlayerName = () => {
   const setPlayerName = useGameState((state) => state.setPlayerName)
-  const unauthenticatedPlayerNameService = useInjection<UnauthenticatedPlayerNameService>(UnauthenticatedPlayerNameService)
+  const guestPlayerNameService = useInjection<GuestPlayerNameService>(GuestPlayerNameService)
   const queryClient = useQueryClient()
 
   const savePlayerNameMutation = useMutation({
     mutationFn: async (newPlayerName: string) => {
-      await unauthenticatedPlayerNameService.savePlayerName(newPlayerName)
+      await guestPlayerNameService.savePlayerName(newPlayerName)
     }
   })
 
@@ -20,7 +20,7 @@ export const usePlayerName = () => {
     const playerName = await queryClient.fetchQuery({
       queryKey: ['playerName'],
       queryFn: async () => {
-        return unauthenticatedPlayerNameService.findPlayerName()
+        return guestPlayerNameService.findPlayerName()
       }
     })
 
