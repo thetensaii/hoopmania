@@ -1,5 +1,6 @@
 import { css } from "../../../../styled-system/css"
 import { useAuth } from "../../../hooks/auth/useAuth"
+import { useAuthState } from "../../../stores/AuthState"
 import { useGameState } from "../../../stores/GameState"
 import { usePostGameScreenState } from "../../../stores/PostGameScreenState"
 import { Button } from "../../atom/Button"
@@ -11,7 +12,8 @@ export const MainTab = () => {
   const { hasSharedScore, setTab, resetScreen } = usePostGameScreenState()
   const startNewGame = useGameState((state) => state.startNewGame)
   const score = useGameState((state) => state.score)
-  const { isConnected, signInWithDiscord } = useAuth()
+  const isAuthenticated = useAuthState((state) => state.isAuthenticated)
+  const { signInWithDiscord } = useAuth()
 
   const handlePlayClick = () => {
     startNewGame()
@@ -25,12 +27,12 @@ export const MainTab = () => {
         <p className={css({ textAlign: 'center', fontSize: "2rem" })}>FINAL SCORE</p>
         <p className={css({ textAlign: 'center', fontSize: "4rem" })}>{score}</p>
       </div>
-      {(!hasSharedScore && !isConnected) &&
+      {(!hasSharedScore && !isAuthenticated) &&
         <Button visual='secondary' onClick={() => setTab('shareScore')}>Share my score</Button>
       }
       <Button visual='secondary' onClick={() => setTab('leaderboard')}>Leaderboard</Button>
-      {isConnected && <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>}
-      {!isConnected && <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
+      {isAuthenticated && <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>}
+      {!isAuthenticated && <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
       <Button size='big' animation='pulse' onClick={handlePlayClick}>PLAY</Button>
     </MenuContainer >
   )

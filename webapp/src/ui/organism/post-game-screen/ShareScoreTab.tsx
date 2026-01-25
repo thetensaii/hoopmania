@@ -6,13 +6,13 @@ import { Button } from "../../atom/Button"
 import { Input } from "../../atom/Input"
 import { Logo } from "../../atom/Logo"
 import { MenuContainer } from "../../atom/MenuContainer"
-import { usePlayerName } from "../../../hooks/usePlayerName"
 import { useShareScore } from "../../../hooks/useShareScore"
-
+import { useFindGuestName } from "../../../hooks/guest-name/useFindGuestName"
 export const ShareScoreTab = () => {
-  const { setTab, setHasSharedScore } = usePostGameScreenState()
-  const { score, playerName, startTime, endTime } = useGameState()
-  const { savePlayerName } = usePlayerName()
+  const { setTab } = usePostGameScreenState()
+  const { score, startTime, endTime } = useGameState()
+  const { isPending, name } = useFindGuestName()
+
   const mutation = useShareScore()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -29,17 +29,19 @@ export const ShareScoreTab = () => {
     const game = { player, score, time }
 
     await mutation.mutateAsync(game)
-    await savePlayerName(player)
-    setHasSharedScore(true)
     setTab('main')
   }
 
+  if (isPending) {
+    return <h1>LOADING...</h1>
+  }
+
   return (
-    <MenuContainer>
-      <form className={css({ display: "flex", flexDir: 'column', gap: '1rem' })} onSubmit={handleSubmit}>
-        <Logo />
-        <p className={css({ textAlign: 'center', fontSize: "2rem" })}>Score : {score}</p>
-        <Input name="name" label="Enter your name" defaultValue={playerName} />
+    <MenuContainer styles={css.raw({ gap: '1rem' })}>
+      <Logo />
+      <p className={css({ textAlign: 'center', fontSize: "2rem" })}>Score : {score}</p>
+      <form className={css({ display: "flex", flexDir: 'column', gap: '1rem', w: 'full' })} onSubmit={handleSubmit}>
+        <Input name="name" label="Enter your name" defaultValue={name ?? undefined} />
         <div className={css({ w: 'full', mt: '[1.5rem]', display: "flex", gap: '1rem' })}>
           <Button visual='secondary' size='medium' onClick={() => setTab('main')}>BACK</Button>
           <Button type='submit' visual='primary'>Share</Button>

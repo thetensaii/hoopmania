@@ -1,8 +1,9 @@
 import { authClient } from "../../auth-client"
 import { Environment } from "../../environment"
+import { useAuthState } from "../../stores/AuthState"
 
 export const useAuth = () => {
-  const { data } = authClient.useSession()
+  const { disconnect } = useAuthState()
 
   const signInWithDiscord = async () => {
     await authClient.signIn.social({
@@ -13,8 +14,9 @@ export const useAuth = () => {
 
   const signOut = async () => {
     await authClient.signOut()
+    disconnect()
   }
 
-  return { isConnected: !!data?.user, signInWithDiscord, signOut }
+  return { signInWithDiscord, signOut }
 
 }

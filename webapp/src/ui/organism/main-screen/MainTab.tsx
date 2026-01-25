@@ -1,5 +1,6 @@
 import { css } from "../../../../styled-system/css"
 import { useAuth } from "../../../hooks/auth/useAuth"
+import { useAuthState } from "../../../stores/AuthState"
 import { useGameState } from "../../../stores/GameState"
 import { useMainScreenState } from "../../../stores/MainScreenState"
 import { Button } from "../../atom/Button"
@@ -11,7 +12,8 @@ export const MainTab = () => {
   const setTab = useMainScreenState((state) => state.setTab)
   const startNewGame = useGameState((state) => state.startNewGame)
   const bestScore = useGameState((state) => state.bestScore)
-  const { isConnected, signOut, signInWithDiscord } = useAuth()
+  const isAuthenticated = useAuthState((state) => state.isAuthenticated)
+  const { signOut, signInWithDiscord } = useAuth()
 
   return (
     <MenuContainer styles={css.raw({ gap: '1rem' })}>
@@ -23,7 +25,7 @@ export const MainTab = () => {
         </div>
       }
       <Button visual='secondary' onClick={() => setTab('leaderboard')}>Leaderboard</Button>
-      {isConnected ?
+      {isAuthenticated ?
         <>
           <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>
           <Button visual='secondary' onClick={signOut}>Sign Out</Button>

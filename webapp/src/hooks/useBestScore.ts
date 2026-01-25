@@ -1,13 +1,13 @@
 import { useInjection } from "inversify-react"
 import { useGameState } from "../stores/GameState"
 import { GuestBestScoreService } from "../domain/GuestBestScoreService"
-import { useAuth } from "./auth/useAuth"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AuthenticatedBestScoreService } from "../domain/AuthenticatedBestScoreService"
+import { useAuthState } from "../stores/AuthState"
 
 export const useBestScore = () => {
   const setBestScore = useGameState((state) => state.setBestScore)
-  const { isConnected } = useAuth()
+  const isAuthenticated = useAuthState((state) => state.isAuthenticated)
   const authenticatedBestScoreService = useInjection<AuthenticatedBestScoreService>(AuthenticatedBestScoreService)
   const guestBestScoreService = useInjection<GuestBestScoreService>(GuestBestScoreService)
   const queryClient = useQueryClient()
@@ -33,7 +33,7 @@ export const useBestScore = () => {
   }
 
   const saveBestScore = async (newBestScore: number) => {
-    if (!isConnected) {
+    if (!isAuthenticated) {
       await saveBestScoreMutation.mutateAsync(newBestScore)
     }
     setBestScore(newBestScore)

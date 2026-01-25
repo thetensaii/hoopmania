@@ -2,6 +2,7 @@
   "name": "hoopmania",
   "scripts": {
     "dev": "pnpm --parallel dev",
+    "build": "pnpm --parallel build",
     "webapp:dev": "pnpm --filter webapp dev",
     "webapp:build": "pnpm --filter webapp build",
     "api:dev": "pnpm --filter api dev",

@@ -6,7 +6,6 @@ interface GameState {
   phase: Phase,
   score: number,
   bestScore?: number,
-  playerName?: string,
   startTime: number,
   lastBucketTime: number,
   endTime: number,
@@ -14,7 +13,6 @@ interface GameState {
   endGame: () => void
   scoreBucket: () => void
   setBestScore: (value: number) => void
-  setPlayerName: (value: string) => void
 }
 
 export const useGameState = create<GameState>((set) => ({
@@ -27,5 +25,4 @@ export const useGameState = create<GameState>((set) => ({
   endGame: () => set(() => ({ phase: 'ended', endTime: Date.now() })),
   scoreBucket: () => set((state) => ({ score: state.score + 1, lastBucketTime: Date.now() })),
   setBestScore: (value: number) => set(() => ({ bestScore: value })),
-  setPlayerName: (value: string) => set(() => ({ playerName: value })),
 }))
