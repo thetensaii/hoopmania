@@ -4,7 +4,25 @@ import { getTimeLeftInSec } from "../utils"
 import { css } from "../../styled-system/css"
 import { ClockIcon } from "./atom/icons/ClockIcon"
 
-export const PlayingScreen = () => {
+const styles = css({
+  position: 'fixed',
+  top: 0,
+  w: 'full',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '1rem',
+  bg: 'darkBlue.500/30',
+  ['&[data-visible="false"]']: {
+    display: 'none'
+  }
+})
+
+type Props = {
+  visible: boolean
+}
+
+export const PlayingScreen = ({ visible }: Props) => {
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const [timeLeft, setTimeLeft] = useState<number>(0)
 
@@ -19,7 +37,10 @@ export const PlayingScreen = () => {
   }, [lastBucketTime])
 
   return (
-    <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', bg: 'darkBlue.500/30' })}>
+    <div
+      data-visible={visible}
+      className={styles}
+    >
       <ClockIcon fillPercent={timeLeft / 10 * 100} />
       <p className={css({
         textAlign: 'center', fontSize: '2rem', color: 'white'

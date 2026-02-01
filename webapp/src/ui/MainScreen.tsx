@@ -1,14 +1,15 @@
-
-import { CenterContainer } from "./atom/CenterContainer"
 import { type ReactNode } from "react"
 import { MainTab } from "./organism/main-screen/MainTab"
 import { LeaderboardTab } from "./organism/LeaderboardTab"
 import { useMainScreenState } from "../stores/MainScreenState"
 import { LastGamesTab } from "./organism/LastGamesTab"
+import { Overlay } from "./atom/Overlay"
 
+type Props = {
+  visible: boolean
+}
 
-
-export const MainScreen = () => {
+export const MainScreen = ({ visible }: Props) => {
   const tab = useMainScreenState((state) => state.tab)
   const setTab = useMainScreenState((state) => state.setTab)
   let component: ReactNode = null
@@ -22,8 +23,8 @@ export const MainScreen = () => {
   }
 
   return (
-    <CenterContainer>
+    <Overlay visible={visible}>
       {component}
-    </CenterContainer>
+    </Overlay>
   )
 }

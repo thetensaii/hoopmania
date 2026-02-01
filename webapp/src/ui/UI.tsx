@@ -14,19 +14,15 @@ const style = css({
   ['& *']: {
     pointerEvents: 'auto'
   },
-  _active: {
-    pointerEvents: 'auto',
-    bg: 'darkBlue.900/80',
-  }
 })
 
 
 export const UI = () => {
   const { isGameReady, isGamePlaying, isGameEnded } = useGamePhase()
 
-  return <div data-active={!isGamePlaying ? "" : undefined} className={style}>
-    {isGamePlaying && <PlayingScreen />}
-    {isGameReady && <MainScreen />}
-    {isGameEnded && <PostGameScreen />}
+  return <div className={style}>
+    <PlayingScreen visible={isGamePlaying} />
+    <MainScreen visible={isGameReady} />
+    <PostGameScreen visible={isGameEnded} />
   </div>
 }
