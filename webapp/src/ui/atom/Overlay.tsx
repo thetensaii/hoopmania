@@ -10,6 +10,7 @@ const overlayStyles = css({
   alignItems: 'center',
   pointerEvents: 'auto',
   bg: 'darkBlue.900/80',
+  overflow: 'hidden',
   transition: "all",
   transitionDuration: "0.3s",
   translate: 'auto',

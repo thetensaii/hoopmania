@@ -4,6 +4,7 @@ import { LeaderboardTab } from "./organism/LeaderboardTab"
 import { useMainScreenState } from "../stores/MainScreenState"
 import { LastGamesTab } from "./organism/LastGamesTab"
 import { Overlay } from "./atom/Overlay"
+import { SlideTransition } from "./molecule/SlideTransition"
 
 type Props = {
   visible: boolean
@@ -24,7 +25,11 @@ export const MainScreen = ({ visible }: Props) => {
 
   return (
     <Overlay visible={visible}>
-      {component}
+      <SlideTransition
+        id={tab}
+      >
+        {component}
+      </SlideTransition>
     </Overlay>
   )
 }
