@@ -22,7 +22,7 @@ type Props = {
   visible: boolean
 }
 
-export const PlayingScreen = ({ visible }: Props) => {
+export const HUD = ({ visible }: Props) => {
   const lastBucketTime = useGameState((state) => state.lastBucketTime)
   const [timeLeft, setTimeLeft] = useState<number>(0)
 

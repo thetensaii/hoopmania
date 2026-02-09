@@ -1,8 +1,8 @@
 import { css } from "../../styled-system/css"
 import { useGamePhase } from "../hooks/useGamePhase"
-import { PostGameScreen } from "./PostGameScreen"
-import { PlayingScreen } from "./PlayingScreen"
-import { MainScreen } from "./MainScreen"
+import { PostGameOverlay } from "./PostGameOverlay"
+import { HUD } from "./HUD"
+import { MainOverlay } from "./MainOverlay"
 
 const style = css({
   position: 'absolute',
@@ -21,8 +21,8 @@ export const UI = () => {
   const { isGameReady, isGamePlaying, isGameEnded } = useGamePhase()
 
   return <div className={style}>
-    <PlayingScreen visible={isGamePlaying} />
-    <MainScreen visible={isGameReady} />
-    <PostGameScreen visible={isGameEnded} />
+    <HUD visible={isGamePlaying} />
+    <MainOverlay visible={isGameReady} />
+    <PostGameOverlay visible={isGameEnded} />
   </div>
 }

@@ -1,7 +1,7 @@
 import { css } from "../../styled-system/css"
 import { Basketball } from "./atom/icons/Basketball"
 
-export const UILoadingScreen = () => {
+export const UILoadingOverlay = () => {
   return (
     <div
       className={css({

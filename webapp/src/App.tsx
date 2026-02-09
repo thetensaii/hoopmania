@@ -3,7 +3,7 @@ import { Experience } from './3d/Experience'
 import { UI } from './ui/UI'
 import { css } from '../styled-system/css'
 import { Suspense } from 'react'
-import { UILoadingScreen } from './ui/UILoadingScreen'
+import { UILoadingOverlay } from './ui/UILoadingOverlay'
 import { useInitApp } from './hooks/useInitApp'
 
 
@@ -11,7 +11,7 @@ function App() {
   const { isPending } = useInitApp()
 
   if (isPending) {
-    return <UILoadingScreen />
+    return <UILoadingOverlay />
   }
 
   return (
@@ -19,7 +19,7 @@ function App() {
       <Canvas>
         <Experience />
       </Canvas>
-      <Suspense fallback={<UILoadingScreen />}>
+      <Suspense fallback={<UILoadingOverlay />}>
         <UI />
       </Suspense>
     </div>
