@@ -20,7 +20,9 @@ import { Preload, useTexture } from '@react-three/drei';
 import { token } from "../../styled-system/tokens"
 import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 
-const bucketAudio = new Audio('./swish.mp3')
+const shootAudio = new Audio('./shoot.mp3')
+const bucketAudio = new Audio('./bonus-point.mp3')
+const gameOverAudio = new Audio('./gameover.mp3')
 useTexture.preload('./particles/firework.png')
 
 export const Experience = () => {
@@ -45,6 +47,8 @@ export const Experience = () => {
   useEffect(() => {
     const intervalId = setIntervalAsync(async () => {
       if (isGamePlaying && getTimeLeftInSec(lastBucketTime, Date.now()) < 0 && !isShootingRef.current) {
+        gameOverAudio.currentTime = 0
+        gameOverAudio.play()
         await endGameFn()
       }
     }, 200)
@@ -87,6 +91,8 @@ export const Experience = () => {
         onPointerUp={(pointerDirection) => {
           hideArrow()
           if (!isShootingRef.current && getTimeLeftInSec(lastBucketTime, Date.now()) > 0) {
+            shootAudio.currentTime = 0
+            shootAudio.play()
             shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
           }
         }} />
