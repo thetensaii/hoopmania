@@ -16,11 +16,12 @@ import { useGamePhase } from "../hooks/useGamePhase"
 import { Fireworks } from "./Fireworks"
 import { useFireworksState } from "../stores/FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
-import { Preload } from '@react-three/drei';
+import { Preload, useTexture } from '@react-three/drei';
 import { token } from "../../styled-system/tokens"
 import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 
 const bucketAudio = new Audio('./swish.mp3')
+useTexture.preload('./particles/firework.png')
 
 export const Experience = () => {
   const basketRigidBodyRef = useRef<RapierRigidBody>(null)
