@@ -8,8 +8,8 @@ import { useInitApp } from './hooks/useInitApp'
 import { Environment } from './environment'
 
 init({
-  domain: Environment.VITE_WEBAPP_URL,
-  endpoint: Environment.VITE_PLAUSIBLE_ENDPOINT_URL
+  domain: Environment.VITE_WEBAPP_HOST,
+  endpoint: Environment.VITE_PLAUSIBLE_ENDPOINT_URL,
 })
 
 
