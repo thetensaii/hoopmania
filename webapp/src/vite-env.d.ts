@@ -9,6 +9,7 @@ interface ViteTypeOptions {
 interface ImportMetaEnv {
   readonly VITE_WEBAPP_URL: string
   readonly VITE_API_URL: string
+  readonly VITE_PLAUSIBLE_ENDPOINT_URL: string
 }
 
 interface ImportMeta {
