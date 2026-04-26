@@ -1,9 +1,16 @@
 import { Canvas } from '@react-three/fiber'
+import { init } from '@plausible-analytics/tracker'
 import { Experience } from './3d/Experience'
 import { UI } from './ui/UI'
 import { css } from '../styled-system/css'
 import { UILoadingOverlay } from './ui/UILoadingOverlay'
 import { useInitApp } from './hooks/useInitApp'
+import { Environment } from './environment'
+
+init({
+  domain: Environment.VITE_WEBAPP_URL
+})
+
 
 
 function App() {
