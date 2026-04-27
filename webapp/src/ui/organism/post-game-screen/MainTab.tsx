@@ -1,5 +1,7 @@
+import { track } from "@plausible-analytics/tracker"
 import { css } from "../../../../styled-system/css"
 import { useAuth } from "../../../hooks/auth/useAuth"
+import { useStartNewGameFn } from "../../../hooks/useStartNewGameFn"
 import { useAuthState } from "../../../stores/AuthState"
 import { useGameState } from "../../../stores/GameState"
 import { usePostGameScreenState } from "../../../stores/PostGameScreenState"
@@ -10,13 +12,13 @@ import { MenuContainer } from "../../atom/MenuContainer"
 
 export const MainTab = () => {
   const { hasSharedScore, setTab, resetScreen } = usePostGameScreenState()
-  const startNewGame = useGameState((state) => state.startNewGame)
+  const startNewGame = useStartNewGameFn()
   const score = useGameState((state) => state.score)
   const isAuthenticated = useAuthState((state) => state.isAuthenticated)
   const { signInWithDiscord } = useAuth()
 
   const handlePlayClick = () => {
-    startNewGame()
+    startNewGame(false)
     resetScreen()
   }
 
@@ -30,8 +32,14 @@ export const MainTab = () => {
       {(!hasSharedScore && !isAuthenticated) &&
         <Button visual='secondary' onClick={() => setTab('shareScore')}>Share my score</Button>
       }
-      <Button visual='secondary' onClick={() => setTab('leaderboard')}>Leaderboard</Button>
-      {isAuthenticated && <Button visual='secondary' onClick={() => setTab('lastGames')}>Last Games</Button>}
+      <Button visual='secondary' onClick={() => {
+        setTab('leaderboard')
+        track("check-leaderboard", {})
+      }}>Leaderboard</Button>
+      {isAuthenticated && <Button visual='secondary' onClick={() => {
+        setTab('lastGames')
+        track("check-last-games", {})
+      }}>Last Games</Button>}
       {!isAuthenticated && <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
       <Button size='big' animation='pulse' onClick={handlePlayClick}>PLAY</Button>
     </MenuContainer >

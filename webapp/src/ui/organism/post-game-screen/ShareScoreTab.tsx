@@ -1,4 +1,5 @@
 import type { FormEventHandler } from "react"
+import { track } from "@plausible-analytics/tracker"
 import { css } from "../../../../styled-system/css"
 import { useGameState } from "../../../stores/GameState"
 import { usePostGameScreenState } from "../../../stores/PostGameScreenState"
@@ -8,6 +9,7 @@ import { Logo } from "../../atom/Logo"
 import { MenuContainer } from "../../atom/MenuContainer"
 import { useShareScore } from "../../../hooks/useShareScore"
 import { useFindGuestName } from "../../../hooks/guest-name/useFindGuestName"
+
 export const ShareScoreTab = () => {
   const { setTab } = usePostGameScreenState()
   const { score, startTime, endTime } = useGameState()
@@ -29,6 +31,8 @@ export const ShareScoreTab = () => {
     const game = { player, score, time }
 
     await mutation.mutateAsync(game)
+
+    track('guest-shared-score', {})
     setTab('main')
   }
 
