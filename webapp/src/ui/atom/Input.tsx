@@ -4,12 +4,12 @@ import { css } from "../../../styled-system/css"
 const styles = css({
   w: 'full',
   bg: 'white',
-  color: 'darkBlue.900',
+  color: 'text.inverted',
   borderRadius: '8px',
   fontSize: '1.5rem',
   paddingLeft: '1rem',
   paddingY: '0.25rem',
-  borderColor: 'darkBlue.900',
+  borderColor: 'border.default',
   borderWidth: 'medium'
 })
 

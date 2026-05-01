@@ -30,18 +30,18 @@ export const MainTab = () => {
         <p className={css({ textAlign: 'center', fontSize: "4rem" })}>{score}</p>
       </div>
       {(!hasSharedScore && !isAuthenticated) &&
-        <Button visual='secondary' onClick={() => setTab('shareScore')}>Share my score</Button>
+        <Button onClick={() => setTab('shareScore')}>Share my score</Button>
       }
-      <Button visual='secondary' onClick={() => {
+      <Button onClick={() => {
         setTab('leaderboard')
         track("check-leaderboard", {})
       }}>Leaderboard</Button>
-      {isAuthenticated && <Button visual='secondary' onClick={() => {
+      {isAuthenticated && <Button onClick={() => {
         setTab('lastGames')
         track("check-last-games", {})
       }}>Last Games</Button>}
-      {!isAuthenticated && <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
-      <Button size='big' animation='pulse' onClick={handlePlayClick}>PLAY</Button>
+      {!isAuthenticated && <Button onClick={signInWithDiscord}><DiscordLogo />Sign in with discord</Button>}
+      <Button visual="accent" size='big' animation='pulse' onClick={handlePlayClick}>PLAY</Button>
     </MenuContainer >
   )
 }

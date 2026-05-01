@@ -47,8 +47,8 @@ export const ShareScoreTab = () => {
       <form className={css({ display: "flex", flexDir: 'column', gap: '1rem', w: 'full' })} onSubmit={handleSubmit}>
         <Input name="name" label="Enter your name" defaultValue={name ?? undefined} />
         <div className={css({ w: 'full', mt: '[1.5rem]', display: "flex", gap: '1rem' })}>
-          <Button visual='secondary' size='medium' onClick={() => setTab('main')}>BACK</Button>
-          <Button type='submit' visual='primary'>Share</Button>
+          <Button size='medium' onClick={() => setTab('main')}>BACK</Button>
+          <Button type='submit' visual="accent">Share</Button>
         </div>
       </form>
     </MenuContainer >

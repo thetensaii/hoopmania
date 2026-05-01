@@ -26,21 +26,21 @@ export const MainTab = () => {
           <p className={css({ textAlign: 'center', fontSize: "3rem", fontWeight: 'bolder' })}>{bestScore}</p>
         </div>
       }
-      <Button visual='secondary' onClick={() => {
+      <Button onClick={() => {
         setTab('leaderboard')
         track("check-leaderboard", {})
       }}>Leaderboard</Button>
       {isAuthenticated ?
         <>
-          <Button visual='secondary' onClick={() => {
+          <Button onClick={() => {
             setTab('lastGames')
             track("check-last-games", {})
           }}>Last Games</Button>
-          <Button visual='secondary' onClick={signOut}>Sign Out</Button>
+          <Button onClick={signOut}>Sign Out</Button>
         </> :
-        <Button visual='secondary' onClick={signInWithDiscord}><DiscordLogo /> Sign in with discord</Button>
+        <Button onClick={signInWithDiscord}><DiscordLogo /> Sign in with discord</Button>
       }
-      <Button size='big' animation='pulse' onClick={() => startNewGame(true)}>PLAY</Button>
+      <Button visual="accent" size='big' animation='pulse' onClick={() => startNewGame(true)}>PLAY</Button>
     </MenuContainer >
   )
 }

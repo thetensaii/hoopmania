@@ -7,8 +7,8 @@ const menuStyles = css.raw({
   maxW: '[400px]',
   p: '2rem',
 
-  bg: 'blue.500',
-  borderColor: 'darkBlue.900',
+  bg: 'container.default',
+  borderColor: 'border.default',
   borderRadius: '12px',
   borderWidth: 'thick',
 

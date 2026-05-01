@@ -12,7 +12,7 @@ export const Title = ({ children }: Props) => {
       mb: '[1rem]',
       fontSize: '2.5rem',
       fontWeight: 'bolder',
-      color: 'white',
+      color: "text.accent",
       textShadow: 'bigTextBorder'
     })}>
       {children}

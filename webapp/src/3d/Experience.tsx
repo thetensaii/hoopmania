@@ -71,7 +71,7 @@ export const Experience = () => {
 
   return <>
     <Preload all />
-    <color args={[token('colors.blue.500')]} attach="background" />
+    <color args={[token('colors.container.default')]} attach="background" />
     <Lights />
     <Physics debug={!import.meta.env.PROD}>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />

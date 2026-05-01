@@ -53,9 +53,9 @@ function TableItem<TData>({ row }: ItemProps<TData>) {
   return <tr className={css({
     bg: 'blue.300',
     borderRadius: '8px',
-    boxShadow: `[0px 3px {colors.darkBlue.900/50}]`,
+    boxShadow: `[0px 3px {colors.border.default/50}]`,
     '& *': {
-      border: '{colors.darkBlue.900/50} solid 2px',
+      border: '{colors.border.default/50} solid 2px',
     },
     '& :first-child': {
       borderLeftRadius: '8px',

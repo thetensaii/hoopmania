@@ -10,7 +10,7 @@ export const UILoadingOverlay = () => {
         left: 0,
         w: 'full',
         h: 'full',
-        bg: 'blue.700',
+        bg: 'container.default',
 
         display: 'flex',
         flexDir: 'column',

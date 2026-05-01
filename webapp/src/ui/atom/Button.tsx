@@ -4,6 +4,7 @@ import { cva, type RecipeVariant, } from "../../../styled-system/css"
 const button = cva({
   base: {
     borderRadius: '8px',
+    borderWidth: 'medium',
     cursor: 'pointer',
     w: 'full',
     display: 'flex',
@@ -13,13 +14,11 @@ const button = cva({
   variants: {
     size: {
       medium: {
-        borderWidth: 'medium',
         fontSize: '1.5rem',
         py: '0.25rem',
         px: '1rem',
       },
       big: {
-        borderWidth: 'medium',
         fontSize: '2rem',
         fontWeight: 'bold',
         py: '0.5rem',
@@ -27,25 +26,26 @@ const button = cva({
       }
     },
     visual: {
-      primary: {
-        bg: 'orange.500',
-        color: 'white',
-        borderColor: 'darkBlue.900',
+      accent: {
+        bg: 'interaction.accent.default',
+        color: 'text.default',
+        borderColor: 'border.default',
         _hover: {
-          bg: 'orange.600'
+          bg: 'interaction.accent.hover'
         },
         _active: {
-          bg: 'orange.700'
+          bg: 'interaction.accent.active'
         }
       },
-      secondary: {
-        color: 'white',
-        borderColor: 'white',
+      primary: {
+        color: 'text.default',
+        bg: 'interaction.secondary.default',
+        borderColor: 'border.inverted',
         _hover: {
-          bg: 'blue.400'
+          bg: 'interaction.secondary.hover'
         },
         _active: {
-          bg: 'blue.600'
+          bg: 'interaction.secondary.active'
         }
       }
     },

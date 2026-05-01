@@ -5,7 +5,7 @@ export const Logo = () => {
     <h1 className={css({
       fontSize: '3.5rem',
       fontWeight: 'bolder',
-      color: 'orange.300',
+      color: 'text.accent',
       textShadow: 'bigTextBorder'
     })}>
       HOOPMANIA

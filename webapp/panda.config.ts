@@ -13,7 +13,7 @@ export default defineConfig({
   strictTokens: true,
   globalCss: {
     html: {
-      color: 'white'
+      color: '{colors.white}'
     }
   },
   globalVars: {
@@ -30,6 +30,7 @@ export default defineConfig({
           full: { value: "100%" }
         },
         colors: {
+          transparent: { value: "#00000000" },
           white: { value: "#FBFEF9" },
           darkBlue: {
             500: { value: "#07004D" },
@@ -71,6 +72,36 @@ export default defineConfig({
         },
       },
       semanticTokens: {
+        colors: {
+          text: {
+            default: { value: '{colors.white}' },
+            accent: { value: '{colors.orange.300}' },
+            inverted: { value: '{colors.darkBlue.900}' }
+          },
+          interaction: {
+            secondary: {
+              default: { value: '{colors.transparent}' },
+              hover: { value: '{colors.blue.400}' },
+              active: { value: '{colors.blue.600}' },
+            },
+            accent: {
+              default: { value: '{colors.orange.500}' },
+              hover: { value: '{colors.orange.600}' },
+              active: { value: '{colors.orange.700}' },
+            },
+          },
+          border: {
+            default: { value: '{colors.darkBlue.900}' },
+            inverted: { value: '{colors.white}' }
+          },
+          container: {
+            default: { value: '{colors.blue.500}' },
+            secondary: { value: '{colors.darkBlue.900/80}' }
+          },
+          icon: {
+            default: { value: '{colors.white}' }
+          }
+        },
         shadows: {
           bigTextBorder: {
             value: [

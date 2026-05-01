@@ -12,7 +12,7 @@ const styles = css({
   alignItems: 'center',
   justifyContent: 'center',
   gap: '1rem',
-  bg: 'darkBlue.500/30',
+  bg: 'container.default',
   ['&[data-visible="false"]']: {
     display: 'none'
   }

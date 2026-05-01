@@ -34,7 +34,7 @@ export const LastGamesTab = ({ onBackButtonClick }: Props) => {
       <Title>LAST GAMES</Title>
       {component}
       <div className={css({ w: 'full', mt: '[1rem]' })}>
-        <Button visual='secondary' onClick={onBackButtonClick}>BACK</Button>
+        <Button onClick={onBackButtonClick}>BACK</Button>
       </div>
     </MenuContainer>
   )
