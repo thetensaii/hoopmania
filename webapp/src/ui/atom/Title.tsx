@@ -13,7 +13,7 @@ export const Title = ({ children }: Props) => {
       fontSize: '2.5rem',
       fontWeight: 'bolder',
       color: "text.accent",
-      textShadow: 'bigTextBorder'
+      textShadow: 'text.heading'
     })}>
       {children}
     </h1>

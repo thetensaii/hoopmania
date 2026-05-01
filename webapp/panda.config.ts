@@ -103,31 +103,33 @@ export default defineConfig({
           }
         },
         shadows: {
-          bigTextBorder: {
-            value: [
-              '2px 0 {colors.darkBlue.900}',
-              '-2px 0 {colors.darkBlue.900}',
-              '0 2px {colors.darkBlue.900}',
-              '0 -2px {colors.darkBlue.900}',
-              '1px 1px {colors.darkBlue.900}',
-              '-1px -1px {colors.darkBlue.900}',
-              '1px -1px {colors.darkBlue.900}',
-              '-1px 1px {colors.darkBlue.900}'
-            ]
+          text: {
+            heading: {
+              value: [
+                '2px 0 {colors.darkBlue.900}',
+                '-2px 0 {colors.darkBlue.900}',
+                '0 2px {colors.darkBlue.900}',
+                '0 -2px {colors.darkBlue.900}',
+                '1px 1px {colors.darkBlue.900}',
+                '-1px -1px {colors.darkBlue.900}',
+                '1px -1px {colors.darkBlue.900}',
+                '-1px 1px {colors.darkBlue.900}'
+              ]
+            },
+            default: {
+              value: [
+                '1px 0 {colors.darkBlue.900}',
+                '-1px 0 {colors.darkBlue.900}',
+                '0 1px {colors.darkBlue.900}',
+                '0 -1px {colors.darkBlue.900}',
+                '0.5px 0.5px {colors.darkBlue.900}',
+                '-0.5px -0.5px {colors.darkBlue.900}',
+                '0.5px -0.5px {colors.darkBlue.900}',
+                '-0.5px 0.5px {colors.darkBlue.900}'
+              ]
+            },
           },
-          smallTextBorder: {
-            value: [
-              '1px 0 {colors.darkBlue.900}',
-              '-1px 0 {colors.darkBlue.900}',
-              '0 1px {colors.darkBlue.900}',
-              '0 -1px {colors.darkBlue.900}',
-              '0.5px 0.5px {colors.darkBlue.900}',
-              '-0.5px -0.5px {colors.darkBlue.900}',
-              '0.5px -0.5px {colors.darkBlue.900}',
-              '-0.5px 0.5px {colors.darkBlue.900}'
-            ]
-          }
-        }
+        },
       },
       keyframes: {
         pulse: {

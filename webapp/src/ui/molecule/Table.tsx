@@ -27,7 +27,7 @@ export function Table<TData>({ data, columns }: Props<TData>) {
     textAlign: 'left',
     borderCollapse: 'separate',
     borderSpacing: '[0px 0.5rem]',
-    textShadow: 'smallTextBorder'
+    textShadow: 'text.default'
   })}>
     <thead>
       {table.getHeaderGroups().map(hg => (

@@ -6,7 +6,7 @@ export const Logo = () => {
       fontSize: '3.5rem',
       fontWeight: 'bolder',
       color: 'text.accent',
-      textShadow: 'bigTextBorder'
+      textShadow: 'text.heading'
     })}>
       HOOPMANIA
     </h1>
