@@ -28,7 +28,7 @@ jobs:
     - name: Build Project
       run: pnpm run --parallel build
 
-  publish-api-image:
+  publish-api-docker-image:
     needs: build
     if: ${{ github.ref_name == 'main' }}
     permissions:
