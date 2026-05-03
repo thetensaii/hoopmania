@@ -3,10 +3,10 @@ import { css } from "../../../styled-system/css"
 import { useGetLastGames } from "../../hooks/useGetLastGames"
 import { Button } from "../atom/Button"
 import { MenuContainer } from "../atom/MenuContainer"
-import { Title } from "../atom/Title"
 import { Table } from "../molecule/Table"
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Game } from "../../domain/Game"
+import { Typography } from "../atom/Typography"
 
 type Props = {
   onBackButtonClick: () => void
@@ -31,7 +31,7 @@ export const LastGamesTab = ({ onBackButtonClick }: Props) => {
 
   return (
     <MenuContainer>
-      <Title>LAST GAMES</Title>
+      <Typography component="h1" variant="heading1">LAST GAMES</Typography>
       {component}
       <div className={css({ w: 'full', mt: '[1rem]' })}>
         <Button onClick={onBackButtonClick}>BACK</Button>

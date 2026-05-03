@@ -1,5 +1,6 @@
 import { css, type Styles } from "../../../styled-system/css"
 import { getCoreRowModel, useReactTable, flexRender, type TableOptions, type Row } from '@tanstack/react-table'
+import { Typography } from "../atom/Typography"
 
 type Props<TData> = {
   data: TableOptions<TData>['data']
@@ -24,21 +25,21 @@ export function Table<TData>({ data, columns }: Props<TData>) {
 
   return <table className={css({
     w: 'full',
-    textAlign: 'left',
     borderCollapse: 'separate',
     borderSpacing: '[0px 0.5rem]',
-    textShadow: 'text.default'
   })}>
     <thead>
       {table.getHeaderGroups().map(hg => (
-        <tr key={hg.id} className={css({ fontWeight: 'bolder' }, rowSpacingStyle)}>
+        <tr key={hg.id} className={css(rowSpacingStyle)}>
           {hg.headers.map(h => (
-            <th key={h.id}>{flexRender(h.column.columnDef.header, h.getContext())}</th>
+            <Typography key={h.id} component="th" outline="body" css={{ textAlign: "left", fontWeight: 'highlight' }}>
+              {flexRender(h.column.columnDef.header, h.getContext())}
+            </Typography>
           ))}
         </tr>
       ))}
     </thead>
-    <tbody className={css({ fontWeight: 'bold', })}>
+    <tbody>
       {table.getRowModel().rows.map((row) => (
         <TableItem key={row.id} row={row} />
       ))}
@@ -70,9 +71,9 @@ function TableItem<TData>({ row }: ItemProps<TData>) {
     }
   }, rowSpacingStyle)}>
     {row.getVisibleCells().map((cell) => (
-      <td key={cell.id}>
+      <Typography key={cell.id} component="td" variant="body2" outline="body" css={{ fontWeight: "highlight" }}>
         {flexRender(cell.column.columnDef.cell, cell.getContext())}
-      </td>
+      </Typography>
     ))}
   </tr>
 }

@@ -21,7 +21,7 @@ export const ClockIcon = ({ size = `[2rem]`, fillPercent = 100 }: Props) => {
     <circle cx={50} cy={50} r={45} className={css({ fill: '[none]', stroke: 'icon.default', strokeWidth: 5 })} />
     <circle cx={50} cy={50} r={35}
       className={css({
-        fill: 'white',
+        fill: 'text.default',
         maskImage: `conic-gradient(transparent calc(360deg - var(--timer-angle)), black calc(360deg - var(--timer-angle)) var(--timer-angle))`,
       })}
       style={{

@@ -14,13 +14,13 @@ const button = cva({
   variants: {
     size: {
       medium: {
-        fontSize: '1.5rem',
+        fontSize: 'text.heading4',
         py: '0.25rem',
         px: '1rem',
       },
       big: {
-        fontSize: '2rem',
-        fontWeight: 'bold',
+        fontSize: 'text.heading3',
+        fontWeight: 'highlight',
         py: '0.5rem',
         px: '1.5rem',
       }

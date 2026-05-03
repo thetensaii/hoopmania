@@ -3,6 +3,7 @@ import { useGameState } from "../stores/GameState"
 import { getTimeLeftInSec } from "../utils"
 import { css } from "../../styled-system/css"
 import { ClockIcon } from "./atom/icons/ClockIcon"
+import { Typography } from "./atom/Typography"
 
 const styles = css({
   position: 'fixed',
@@ -42,11 +43,7 @@ export const HUD = ({ visible }: Props) => {
       className={styles}
     >
       <ClockIcon fillPercent={timeLeft / 10 * 100} />
-      <p className={css({
-        textAlign: 'center', fontSize: '2rem', color: 'white'
-      })}>
-        {timeLeft.toFixed(2)}
-      </p>
+      <Typography variant="heading3" css={{ textAlign: "center" }}>{timeLeft.toFixed(2)}</Typography>
     </div >
   )
 }

@@ -2,11 +2,11 @@ import type { ReactNode } from "react"
 import { useGetLeaderboard } from "../../hooks/useGetLeaderboard"
 import { Button } from "../atom/Button"
 import { MenuContainer } from "../atom/MenuContainer"
-import { Title } from "../atom/Title"
 import { Table } from "../molecule/Table"
 import { css } from "../../../styled-system/css"
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Game } from "../../domain/Game"
+import { Typography } from "../atom/Typography"
 
 type Props = {
   onBackButtonClick: () => void
@@ -36,7 +36,7 @@ export const LeaderboardTab = ({ onBackButtonClick }: Props) => {
 
   return (
     <MenuContainer>
-      <Title>LEADERBOARD</Title>
+      <Typography component="h1" variant="heading1">LEADERBOARD</Typography>
       {component}
       <div className={css({ w: 'full', mt: '[1rem]' })}>
         <Button onClick={onBackButtonClick}>BACK</Button>

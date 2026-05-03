@@ -7,8 +7,8 @@ import { useGameState } from "../../../stores/GameState"
 import { usePostGameScreenState } from "../../../stores/PostGameScreenState"
 import { Button } from "../../atom/Button"
 import { DiscordLogo } from "../../atom/icons/DiscordLogo"
-import { Logo } from "../../atom/Logo"
 import { MenuContainer } from "../../atom/MenuContainer"
+import { Typography } from "../../atom/Typography"
 
 export const MainTab = () => {
   const { hasSharedScore, setTab, resetScreen } = usePostGameScreenState()
@@ -24,10 +24,10 @@ export const MainTab = () => {
 
   return (
     <MenuContainer styles={css.raw({ gap: '1rem' })}>
-      <Logo />
+      <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       <div>
-        <p className={css({ textAlign: 'center', fontSize: "2rem" })}>FINAL SCORE</p>
-        <p className={css({ textAlign: 'center', fontSize: "4rem" })}>{score}</p>
+        <Typography variant="heading3" css={{ textAlign: "center" }}>FINAL SCORE</Typography>
+        <Typography variant="heading2" css={{ textAlign: "center" }}>{score}</Typography>
       </div>
       {(!hasSharedScore && !isAuthenticated) &&
         <Button onClick={() => setTab('shareScore')}>Share my score</Button>

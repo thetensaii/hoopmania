@@ -1,5 +1,6 @@
 import { css } from "../../styled-system/css"
 import { Basketball } from "./atom/icons/Basketball"
+import { Typography } from "./atom/Typography"
 
 export const UILoadingOverlay = () => {
   return (
@@ -19,7 +20,7 @@ export const UILoadingOverlay = () => {
       })}
     >
       <Basketball styles={css.raw({ animation: 'rotate linear 1500ms infinite' })} />
-      <p className={css({ textAlign: 'center', fontSize: '[3rem]' })}>LOADING...</p>
+      <Typography variant="heading3" css={{ textAlign: 'center' }}>LOADING...</Typography>
     </div>
   )
 }

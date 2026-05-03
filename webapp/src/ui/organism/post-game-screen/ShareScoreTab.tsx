@@ -5,10 +5,10 @@ import { useGameState } from "../../../stores/GameState"
 import { usePostGameScreenState } from "../../../stores/PostGameScreenState"
 import { Button } from "../../atom/Button"
 import { Input } from "../../atom/Input"
-import { Logo } from "../../atom/Logo"
 import { MenuContainer } from "../../atom/MenuContainer"
 import { useShareScore } from "../../../hooks/useShareScore"
 import { useFindGuestName } from "../../../hooks/guest-name/useFindGuestName"
+import { Typography } from "../../atom/Typography"
 
 export const ShareScoreTab = () => {
   const { setTab } = usePostGameScreenState()
@@ -42,8 +42,8 @@ export const ShareScoreTab = () => {
 
   return (
     <MenuContainer styles={css.raw({ gap: '1rem' })}>
-      <Logo />
-      <p className={css({ textAlign: 'center', fontSize: "2rem" })}>Score : {score}</p>
+      <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
+      <Typography variant="heading3">Score : {score}</Typography>
       <form className={css({ display: "flex", flexDir: 'column', gap: '1rem', w: 'full' })} onSubmit={handleSubmit}>
         <Input name="name" label="Enter your name" defaultValue={name ?? undefined} />
         <div className={css({ w: 'full', mt: '[1.5rem]', display: "flex", gap: '1rem' })}>

@@ -11,11 +11,6 @@ export default defineConfig({
   exclude: [],
   presets: [],
   strictTokens: true,
-  globalCss: {
-    html: {
-      color: '{colors.white}'
-    }
-  },
   globalVars: {
     '--timer-angle': {
       syntax: '<angle>',
@@ -70,6 +65,22 @@ export default defineConfig({
             900: { value: "#2F0E13" },
           }
         },
+        fontSizes: {
+          xs: { value: "0.75rem" },
+          sm: { value: "0.875rem" },
+          base: { value: "1rem" },
+          lg: { value: "1.125rem" },
+          xl: { value: "1.25rem" },
+          "2xl": { value: "1.5rem" },
+          "3xl": { value: "1.875rem" },
+          "4xl": { value: "2.25rem" },
+          "5xl": { value: "3rem" },
+          "6xl": { value: "3.75rem" },
+        },
+        fontWeights: {
+          regular: { value: '400' },
+          bold: { value: '700' },
+        }
       },
       semanticTokens: {
         colors: {
@@ -96,11 +107,26 @@ export default defineConfig({
           },
           container: {
             default: { value: '{colors.blue.500}' },
-            secondary: { value: '{colors.darkBlue.900/80}' }
+            secondary: { value: '{colors.darkBlue.900/80}' },
+            inverted: { value: '{colors.white}' },
           },
           icon: {
             default: { value: '{colors.white}' }
           }
+        },
+        fontSizes: {
+          text: {
+            body1: { value: "{fontSizes.xl}" },
+            body2: { value: "{fontSizes.base}" },
+            heading1: { value: "{fontSizes.5xl}" },
+            heading2: { value: "{fontSizes.4xl}" },
+            heading3: { value: "{fontSizes.3xl}" },
+            heading4: { value: "{fontSizes.2xl}" },
+          },
+        },
+        fontWeights: {
+          neutral: { value: "{fontWeights.regular}" },
+          highlight: { value: "{fontWeights.bold}" }
         },
         shadows: {
           text: {

@@ -1,12 +1,13 @@
 import { useId } from "react"
 import { css } from "../../../styled-system/css"
+import { Typography } from "./Typography"
 
 const styles = css({
   w: 'full',
-  bg: 'white',
+  bg: 'container.inverted',
   color: 'text.inverted',
   borderRadius: '8px',
-  fontSize: '1.5rem',
+  fontSize: 'text.heading4',
   paddingLeft: '1rem',
   paddingY: '0.25rem',
   borderColor: 'border.default',
@@ -23,7 +24,7 @@ export const Input = ({ name, label, defaultValue }: Props) => {
   const id = useId();
   return (
     <div className={css({ w: 'full', display: 'flex', flexDirection: 'column' })}>
-      <label htmlFor={id}>{label}</label>
+      <Typography component="label" htmlFor={id}>{label}</Typography>
       <input className={styles} id={id} name={name} defaultValue={defaultValue} />
     </div>
   )
