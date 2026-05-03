@@ -54,7 +54,7 @@ export const Basket = ({ ref, initialPosition, onBucket, score }: BasketProps) =
           })}
           className={css({
             color: 'darkBlue.900',
-            fontSize: '1rem'
+            fontSize: 'text.body1'
           })}
         >
           {score}

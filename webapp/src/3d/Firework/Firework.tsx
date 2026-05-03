@@ -57,7 +57,7 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
       </rawShaderMaterial>
       <group ref={scoreGroupRef}>
         <Html scale={10} center className={css({ pointerEvents: 'none', userSelect: 'none' })}>
-          <div className={css({ fontSize: '2rem' })}>+1</div>
+          <div className={css({ fontSize: 'text.heading3' })}>+1</div>
         </Html>
       </group>
     </points>
