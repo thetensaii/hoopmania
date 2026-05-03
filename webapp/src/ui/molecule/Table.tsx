@@ -52,18 +52,18 @@ type ItemProps<TData> = {
 }
 function TableItem<TData>({ row }: ItemProps<TData>) {
   return <tr className={css({
-    bg: 'blue.300',
-    borderRadius: '8px',
+    bg: 'container.secondary',
+    borderRadius: 'lg',
     boxShadow: `[0px 3px {colors.border.default/50}]`,
     '& *': {
       border: '{colors.border.default/50} solid 2px',
     },
     '& :first-child': {
-      borderLeftRadius: '8px',
+      borderLeftRadius: 'lg',
       borderRight: 'none'
     },
     '& :last-child': {
-      borderRightRadius: '8px',
+      borderRightRadius: 'lg',
       borderLeft: 'none'
     },
     '& :not(:first-child,:last-child)': {

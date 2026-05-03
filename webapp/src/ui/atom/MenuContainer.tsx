@@ -5,11 +5,11 @@ import type { SystemStyleObject } from "../../../styled-system/types"
 const menuStyles = css.raw({
   w: '[80%]',
   maxW: '[400px]',
-  p: 'xxl',
+  p: '2xl',
 
   bg: 'container.default',
   borderColor: 'border.default',
-  borderRadius: '12px',
+  borderRadius: 'xl',
   borderWidth: 'thick',
 
   display: 'flex',

@@ -88,7 +88,15 @@ export default defineConfig({
           md: { value: "1rem" },
           lg: { value: "1.25rem" },
           xl: { value: "1.5rem" },
-          xxl: { value: "2rem" }
+          "2xl": { value: "2rem" }
+        },
+        radii: {
+          xs: { value: "2px" },
+          sm: { value: "4px" },
+          md: { value: "6px" },
+          lg: { value: "8px" },
+          xl: { value: "12px" },
+          "2xl": { value: "16px" },
         }
       },
       semanticTokens: {
@@ -116,7 +124,8 @@ export default defineConfig({
           },
           container: {
             default: { value: '{colors.blue.500}' },
-            secondary: { value: '{colors.darkBlue.900/80}' },
+            secondary: { value: '{colors.blue.300}' },
+            background: { value: '{colors.darkBlue.900/80}' },
             inverted: { value: '{colors.white}' },
           },
           icon: {
@@ -141,26 +150,26 @@ export default defineConfig({
           text: {
             heading: {
               value: [
-                '2px 0 {colors.darkBlue.900}',
-                '-2px 0 {colors.darkBlue.900}',
-                '0 2px {colors.darkBlue.900}',
-                '0 -2px {colors.darkBlue.900}',
-                '1px 1px {colors.darkBlue.900}',
-                '-1px -1px {colors.darkBlue.900}',
-                '1px -1px {colors.darkBlue.900}',
-                '-1px 1px {colors.darkBlue.900}'
+                '2px 0 {colors.text.inverted}',
+                '-2px 0 {colors.text.inverted}',
+                '0 2px {colors.text.inverted}',
+                '0 -2px {colors.text.inverted}',
+                '1px 1px {colors.text.inverted}',
+                '-1px -1px {colors.text.inverted}',
+                '1px -1px {colors.text.inverted}',
+                '-1px 1px {colors.text.inverted}'
               ]
             },
             default: {
               value: [
-                '1px 0 {colors.darkBlue.900}',
-                '-1px 0 {colors.darkBlue.900}',
-                '0 1px {colors.darkBlue.900}',
-                '0 -1px {colors.darkBlue.900}',
-                '0.5px 0.5px {colors.darkBlue.900}',
-                '-0.5px -0.5px {colors.darkBlue.900}',
-                '0.5px -0.5px {colors.darkBlue.900}',
-                '-0.5px 0.5px {colors.darkBlue.900}'
+                '1px 0 {colors.text.inverted}',
+                '-1px 0 {colors.text.inverted}',
+                '0 1px {colors.text.inverted}',
+                '0 -1px {colors.text.inverted}',
+                '0.5px 0.5px {colors.text.inverted}',
+                '-0.5px -0.5px {colors.text.inverted}',
+                '0.5px -0.5px {colors.text.inverted}',
+                '-0.5px 0.5px {colors.text.inverted}'
               ]
             },
           },

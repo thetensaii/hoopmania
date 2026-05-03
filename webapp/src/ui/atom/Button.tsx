@@ -3,7 +3,7 @@ import { cva, type RecipeVariant, } from "../../../styled-system/css"
 
 const button = cva({
   base: {
-    borderRadius: '8px',
+    borderRadius: 'lg',
     borderWidth: 'medium',
     cursor: 'pointer',
     w: 'full',

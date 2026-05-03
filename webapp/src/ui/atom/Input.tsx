@@ -6,7 +6,7 @@ const styles = css({
   w: 'full',
   bg: 'container.inverted',
   color: 'text.inverted',
-  borderRadius: '8px',
+  borderRadius: 'lg',
   fontSize: 'text.heading4',
   paddingLeft: 'md',
   paddingY: 'xxs',
