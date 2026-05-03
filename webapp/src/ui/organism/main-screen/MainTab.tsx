@@ -22,8 +22,8 @@ export const MainTab = () => {
       <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       {bestScore !== undefined &&
         <div>
-          <Typography variant="heading3" css={{ textAlign: "center" }}>BEST SCORE</Typography>
-          <Typography variant="heading2" css={{ textAlign: "center" }}>{bestScore}</Typography>
+          <Typography variant="heading3" cssRaw={css.raw({ textAlign: "center" })}>BEST SCORE</Typography>
+          <Typography variant="heading2" cssRaw={css.raw({ textAlign: "center" })}>{bestScore}</Typography>
         </div>
       }
       <Button onClick={() => {

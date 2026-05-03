@@ -32,7 +32,7 @@ export function Table<TData>({ data, columns }: Props<TData>) {
       {table.getHeaderGroups().map(hg => (
         <tr key={hg.id} className={css(rowSpacingStyle)}>
           {hg.headers.map(h => (
-            <Typography key={h.id} component="th" outline="body" css={{ textAlign: "left", fontWeight: 'highlight' }}>
+            <Typography key={h.id} component="th" outline="body" cssRaw={css.raw({ textAlign: "left", fontWeight: 'highlight' })}>
               {flexRender(h.column.columnDef.header, h.getContext())}
             </Typography>
           ))}
@@ -71,7 +71,7 @@ function TableItem<TData>({ row }: ItemProps<TData>) {
     }
   }, rowSpacingStyle)}>
     {row.getVisibleCells().map((cell) => (
-      <Typography key={cell.id} component="td" variant="body2" outline="body" css={{ fontWeight: "highlight" }}>
+      <Typography key={cell.id} component="td" variant="body2" outline="body" cssRaw={css.raw({ fontWeight: "highlight" })}>
         {flexRender(cell.column.columnDef.cell, cell.getContext())}
       </Typography>
     ))}

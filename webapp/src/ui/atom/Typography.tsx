@@ -1,5 +1,6 @@
 import type { AllHTMLAttributes } from "react";
-import { css, cva, cx, type RecipeVariant, type Styles } from "../../../styled-system/css";
+import { css, cva, type RecipeVariant } from "../../../styled-system/css";
+import type { SystemStyleObject } from "../../../styled-system/types";
 
 const typography = cva({
   base: {
@@ -47,10 +48,10 @@ type Props = AllHTMLAttributes<HTMLElement> & {
   component?: ComponentType
   variant?: TypographyVariants['variant']
   outline?: TypographyVariants['outline']
-  css?: Styles
+  cssRaw?: SystemStyleObject
 }
 
-export const Typography = ({ component: Component = 'p', variant, outline, css: overrideCss, children, ...props }: Props) => {
+export const Typography = ({ component: Component = 'p', variant, outline, cssRaw, children, ...props }: Props) => {
 
-  return (<Component className={cx(typography({ variant, outline }), css(overrideCss))} {...props}>{children}</Component>)
+  return (<Component className={css(typography.raw({ variant, outline }), cssRaw)} {...props}>{children}</Component>)
 }

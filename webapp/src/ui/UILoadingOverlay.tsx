@@ -20,7 +20,7 @@ export const UILoadingOverlay = () => {
       })}
     >
       <Basketball styles={css.raw({ animation: 'rotate linear 1500ms infinite' })} />
-      <Typography variant="heading3" css={{ textAlign: 'center' }}>LOADING...</Typography>
+      <Typography variant="heading3" cssRaw={css.raw({ textAlign: 'center' })}>LOADING...</Typography>
     </div>
   )
 }

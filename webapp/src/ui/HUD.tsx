@@ -43,7 +43,7 @@ export const HUD = ({ visible }: Props) => {
       className={styles}
     >
       <ClockIcon fillPercent={timeLeft / 10 * 100} />
-      <Typography variant="heading3" css={{ textAlign: "center" }}>{timeLeft.toFixed(2)}</Typography>
+      <Typography variant="heading3" cssRaw={css.raw({ textAlign: "center" })}>{timeLeft.toFixed(2)}</Typography>
     </div >
   )
 }

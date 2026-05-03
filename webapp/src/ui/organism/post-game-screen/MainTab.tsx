@@ -26,8 +26,8 @@ export const MainTab = () => {
     <MenuContainer styles={css.raw({ gap: '1rem' })}>
       <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       <div>
-        <Typography variant="heading3" css={{ textAlign: "center" }}>FINAL SCORE</Typography>
-        <Typography variant="heading2" css={{ textAlign: "center" }}>{score}</Typography>
+        <Typography variant="heading3" cssRaw={css.raw({ textAlign: "center" })}>FINAL SCORE</Typography>
+        <Typography variant="heading2" cssRaw={css.raw({ textAlign: "center" })}>{score}</Typography>
       </div>
       {(!hasSharedScore && !isAuthenticated) &&
         <Button onClick={() => setTab('shareScore')}>Share my score</Button>
