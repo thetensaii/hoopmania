@@ -8,8 +8,8 @@ const styles = css({
   color: 'text.inverted',
   borderRadius: '8px',
   fontSize: 'text.heading4',
-  paddingLeft: '1rem',
-  paddingY: '0.25rem',
+  paddingLeft: 'md',
+  paddingY: 'xxs',
   borderColor: 'border.default',
   borderWidth: 'medium'
 })

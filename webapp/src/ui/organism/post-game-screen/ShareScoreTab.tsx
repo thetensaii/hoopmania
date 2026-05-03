@@ -41,12 +41,12 @@ export const ShareScoreTab = () => {
   }
 
   return (
-    <MenuContainer styles={css.raw({ gap: '1rem' })}>
+    <MenuContainer styles={css.raw({ gap: 'md' })}>
       <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       <Typography variant="heading3">Score : {score}</Typography>
-      <form className={css({ display: "flex", flexDir: 'column', gap: '1rem', w: 'full' })} onSubmit={handleSubmit}>
+      <form className={css({ display: "flex", flexDir: 'column', gap: 'md', w: 'full' })} onSubmit={handleSubmit}>
         <Input name="name" label="Enter your name" defaultValue={name ?? undefined} />
-        <div className={css({ w: 'full', mt: '[1.5rem]', display: "flex", gap: '1rem' })}>
+        <div className={css({ w: 'full', mt: 'xl', display: "flex", gap: 'md' })}>
           <Button size='medium' onClick={() => setTab('main')}>BACK</Button>
           <Button type='submit' visual="accent">Share</Button>
         </div>

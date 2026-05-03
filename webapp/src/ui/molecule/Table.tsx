@@ -9,13 +9,13 @@ type Props<TData> = {
 
 const rowSpacingStyle: Styles = {
   '& *': {
-    paddingY: '0.5rem'
+    paddingY: 'xs'
   },
   '& :first-child': {
-    paddingLeft: '1rem',
+    paddingLeft: 'md',
   },
   '& :last-child': {
-    paddingRight: '1rem',
+    paddingRight: 'md',
     textAlign: 'right'
   }
 }

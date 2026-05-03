@@ -5,7 +5,7 @@ import type { SystemStyleObject } from "../../../styled-system/types"
 const menuStyles = css.raw({
   w: '[80%]',
   maxW: '[400px]',
-  p: '2rem',
+  p: 'xxl',
 
   bg: 'container.default',
   borderColor: 'border.default',

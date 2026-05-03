@@ -80,6 +80,15 @@ export default defineConfig({
         fontWeights: {
           regular: { value: '400' },
           bold: { value: '700' },
+        },
+        spacing: {
+          xxs: { value: "0.25rem" },
+          xs: { value: "0.5rem" },
+          sm: { value: "0.75rem" },
+          md: { value: "1rem" },
+          lg: { value: "1.25rem" },
+          xl: { value: "1.5rem" },
+          xxl: { value: "2rem" }
         }
       },
       semanticTokens: {

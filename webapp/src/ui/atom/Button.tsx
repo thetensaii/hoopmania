@@ -9,20 +9,20 @@ const button = cva({
     w: 'full',
     display: 'flex',
     justifyContent: 'center',
-    gap: '0.5rem'
+    gap: 'xs'
   },
   variants: {
     size: {
       medium: {
         fontSize: 'text.heading4',
-        py: '0.25rem',
-        px: '1rem',
+        py: 'xxs',
+        px: 'md',
       },
       big: {
         fontSize: 'text.heading3',
         fontWeight: 'highlight',
-        py: '0.5rem',
-        px: '1.5rem',
+        py: 'xs',
+        px: 'xl',
       }
     },
     visual: {

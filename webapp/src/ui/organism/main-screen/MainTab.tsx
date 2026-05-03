@@ -18,7 +18,7 @@ export const MainTab = () => {
   const { signOut, signInWithDiscord } = useAuth()
 
   return (
-    <MenuContainer styles={css.raw({ gap: '1rem' })}>
+    <MenuContainer styles={css.raw({ gap: 'md' })}>
       <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       {bestScore !== undefined &&
         <div>

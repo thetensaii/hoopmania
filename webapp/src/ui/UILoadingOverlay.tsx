@@ -7,8 +7,8 @@ export const UILoadingOverlay = () => {
     <div
       className={css({
         position: 'absolute',
-        top: 0,
-        left: 0,
+        top: '[0]',
+        left: '[0]',
         w: 'full',
         h: 'full',
         bg: 'container.default',

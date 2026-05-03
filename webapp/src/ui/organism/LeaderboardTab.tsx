@@ -38,7 +38,7 @@ export const LeaderboardTab = ({ onBackButtonClick }: Props) => {
     <MenuContainer>
       <Typography component="h1" variant="heading1">LEADERBOARD</Typography>
       {component}
-      <div className={css({ w: 'full', mt: '[1rem]' })}>
+      <div className={css({ w: 'full', mt: 'md' })}>
         <Button onClick={onBackButtonClick}>BACK</Button>
       </div>
     </MenuContainer>

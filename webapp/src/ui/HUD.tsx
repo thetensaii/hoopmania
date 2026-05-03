@@ -7,12 +7,12 @@ import { Typography } from "./atom/Typography"
 
 const styles = css({
   position: 'fixed',
-  top: 0,
+  top: '[0]',
   w: 'full',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '1rem',
+  gap: 'md',
   bg: 'container.default',
   ['&[data-visible="false"]']: {
     display: 'none'

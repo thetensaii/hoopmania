@@ -23,7 +23,7 @@ export const MainTab = () => {
   }
 
   return (
-    <MenuContainer styles={css.raw({ gap: '1rem' })}>
+    <MenuContainer styles={css.raw({ gap: 'md' })}>
       <Typography component="h1" variant="heading1">HOOPMANIA</Typography>
       <div>
         <Typography variant="heading3" cssRaw={css.raw({ textAlign: "center" })}>FINAL SCORE</Typography>

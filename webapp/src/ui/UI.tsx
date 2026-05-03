@@ -6,8 +6,8 @@ import { MainOverlay } from "./MainOverlay"
 
 const style = css({
   position: 'absolute',
-  top: 0,
-  left: 0,
+  top: '[0]',
+  left: '[0]',
   w: 'full',
   h: 'full',
   pointerEvents: 'none',
