@@ -29,7 +29,7 @@ export const Basket = ({ ref, initialPosition, onBucket, score }: BasketProps) =
         <MeshCollider type='trimesh'>
           <mesh rotation-x={Math.PI / 2}>
             <torusGeometry args={[basketDiameter_M * 10 / 2, 0.02]} />
-            <meshStandardMaterial color="red" />
+            <meshStandardMaterial color="red" emissive="#FF0000" emissiveIntensity={7} toneMapped={false} />
           </mesh>
         </MeshCollider>
         <MeshCollider type='trimesh'>

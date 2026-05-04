@@ -3,6 +3,7 @@ import { Ball } from "./Ball"
 import { Basket } from "./Basket"
 import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
+import { Bloom, EffectComposer } from "@react-three/postprocessing"
 import { useEffect, useRef } from "react"
 import { useGameState } from "../stores/GameState"
 import { Group, Mesh, Vector3 } from "three"
@@ -17,7 +18,6 @@ import { Fireworks } from "./Fireworks"
 import { useFireworksState } from "../stores/FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload, useTexture } from '@react-three/drei';
-import { token } from "../../styled-system/tokens"
 import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 
 const shootAudio = new Audio('./shoot.mp3')
@@ -71,9 +71,9 @@ export const Experience = () => {
 
   return <>
     <Preload all />
-    <color args={[token('colors.blue.500')]} attach="background" />
+    <color args={["black"]} attach="background" />
     <Lights />
-    <Physics debug={!import.meta.env.PROD}>
+    <Physics>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />
       <Ball rigidBodyRef={ballRigidBodyRef} isShootingRef={isShootingRef} initialPosition={BALL_INITIAL_POS} />
       <ShootingPlane
@@ -99,5 +99,8 @@ export const Experience = () => {
       <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={BALL_INITIAL_POS} />
       {isGamePlaying && <Fireworks />}
     </Physics>
+    <EffectComposer>
+      <Bloom intensity={1} luminanceSmoothing={2.3} />
+    </EffectComposer>
   </>
 }
