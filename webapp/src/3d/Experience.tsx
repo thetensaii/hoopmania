@@ -3,7 +3,7 @@ import { Ball } from "./Ball"
 import { Basket } from "./Basket"
 import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
-import { Bloom, EffectComposer } from "@react-three/postprocessing"
+import { Bloom, EffectComposer, ToneMapping } from "@react-three/postprocessing"
 import { useEffect, useRef } from "react"
 import { useGameState } from "../stores/GameState"
 import { Group, Mesh, Vector3 } from "three"
@@ -19,6 +19,7 @@ import { useFireworksState } from "../stores/FireworksState"
 import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload, useTexture } from '@react-three/drei';
 import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
+import { ToneMappingMode } from "postprocessing"
 
 const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
@@ -100,7 +101,8 @@ export const Experience = () => {
       {isGamePlaying && <Fireworks />}
     </Physics>
     <EffectComposer>
-      <Bloom intensity={1} luminanceSmoothing={2.3} />
+      <Bloom />
+      <ToneMapping mode={ToneMappingMode.UNCHARTED2} />
     </EffectComposer>
   </>
 }

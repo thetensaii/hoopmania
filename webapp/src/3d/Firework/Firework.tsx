@@ -20,7 +20,7 @@ type Props = {
 export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Props) => {
   const materialRef = useRef<RawShaderMaterial>(null)
   const scoreGroupRef = useRef<Group>(null)
-  const { positionsArray, sizesArray, timeMultipliersArray } = useMemo(() => createFireworkAttributes(200 + Math.floor(200 * Math.random())), [])
+  const { positionsArray, sizesArray, timeMultipliersArray } = useMemo(() => createFireworkAttributes(100 + Math.floor(50 * Math.random())), [])
   const color = useMemo(() => {
     return new Color().setHSL(Math.random(), 1, 0.7)
   }, [])

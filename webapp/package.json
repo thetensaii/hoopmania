@@ -23,6 +23,7 @@
     "gsap": "^3.13.0",
     "inversify": "^7.10.8",
     "inversify-react": "^1.2.0",
+    "postprocessing": "^6.39.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-transition-group": "^4.4.5",

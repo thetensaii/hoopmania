@@ -27,7 +27,7 @@ export const Ball = ({ rigidBodyRef, isShootingRef, initialPosition }: BallProps
     <RigidBody ref={rigidBodyRef} colliders="ball" position={initialPosition} lockTranslations>
       <mesh>
         <sphereGeometry args={[ballDiameter_M * 10 / 2]} />
-        <meshStandardMaterial emissive="#fc4102" emissiveIntensity={6} toneMapped={false} />
+        <meshStandardMaterial color={"#f9764a"} emissive="#fc4102" emissiveIntensity={4} toneMapped={false} />
       </mesh>
     </RigidBody>
   )
