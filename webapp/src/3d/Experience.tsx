@@ -102,7 +102,7 @@ export const Experience = () => {
       {isGamePlaying && <Fireworks />}
     </Physics>
     <EffectComposer>
-      <Bloom />
+      <Bloom radius={0.4} />
       <ToneMapping mode={ToneMappingMode.UNCHARTED2} />
     </EffectComposer>
   </>
