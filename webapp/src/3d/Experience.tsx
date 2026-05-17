@@ -25,6 +25,7 @@ const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
 const gameOverAudio = new Audio('./gameover.mp3')
 useTexture.preload('./particles/firework.png')
+useTexture.preload('./textures/backboard.jpg')
 
 export const Experience = () => {
   const basketRigidBodyRef = useRef<RapierRigidBody>(null)

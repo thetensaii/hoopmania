@@ -1,13 +1,14 @@
 import { CuboidCollider, MeshCollider, RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { type RefObject } from "react";
+import * as THREE from "three"
 import { Vector3 } from "three";
 import { useBasketActions } from "../hooks/3d/useBasketActions";
-import { Html } from "@react-three/drei";
+import { Html, useTexture } from "@react-three/drei";
 import { css } from "../../styled-system/css";
 
 const basketDiameter_M = 0.07
 const backboardLength_M = 0.183
-const backboardHeight_M = 0.110
+const backboardHeight_M = 0.122
 
 type BasketProps = {
   ref: RefObject<RapierRigidBody | null>
@@ -18,6 +19,9 @@ type BasketProps = {
 
 export const Basket = ({ ref, initialPosition, onBucket, score }: BasketProps) => {
   useBasketActions(ref)
+
+  const backboardTexture = useTexture('./textures/backboard.jpg')
+  backboardTexture.colorSpace = THREE.SRGBColorSpace
 
   const handleBucket = () => {
     onBucket()
@@ -35,7 +39,7 @@ export const Basket = ({ ref, initialPosition, onBucket, score }: BasketProps) =
         <MeshCollider type='trimesh'>
           <mesh position={[0, backboardHeight_M * 10 / 2, -basketDiameter_M * 10 / 2]}>
             <planeGeometry args={[backboardLength_M * 10, backboardHeight_M * 10]} />
-            <meshStandardMaterial />
+            <meshStandardMaterial color={"blue"} transparent alphaMap={backboardTexture} emissive={"blue"} emissiveIntensity={14} toneMapped={false} />
           </mesh>
         </MeshCollider>
 
