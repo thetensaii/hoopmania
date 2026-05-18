@@ -1,4 +1,4 @@
-import { useThree } from "@react-three/fiber"
+import { extend, useThree } from "@react-three/fiber"
 import { Ball } from "./Ball"
 import { Basket } from "./Basket"
 import { Lights } from "./Lights"
@@ -8,7 +8,6 @@ import { useEffect, useRef } from "react"
 import { useGameState } from "../stores/GameState"
 import { Group, Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
-import { getTimeLeftInSec } from "../utils"
 import { BALL_INITIAL_POS, resetBallPosition, shootBall } from "./utils/ballActionsFunctions"
 import { ShootingArrow } from "./ShootingArrow"
 import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
@@ -20,12 +19,16 @@ import { BASKET_INITIAL_POS } from "../hooks/3d/useBasketActions"
 import { Preload, useTexture } from '@react-three/drei';
 import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 import { ToneMappingMode } from "postprocessing"
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { getTimeLeftInSec } from "../hooks/useGetTimeLeft"
 
 const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
 const gameOverAudio = new Audio('./gameover.mp3')
 useTexture.preload('./particles/firework.png')
 useTexture.preload('./textures/backboard.jpg')
+
+extend({ TextGeometry })
 
 export const Experience = () => {
   const basketRigidBodyRef = useRef<RapierRigidBody>(null)
