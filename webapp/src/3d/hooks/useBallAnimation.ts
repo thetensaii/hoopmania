@@ -3,7 +3,7 @@ import gsap from "gsap"
 import type { RefObject } from "react"
 import { MeshStandardMaterial, type Mesh } from "three"
 
-export const useBallAnimation = (ballMeshRef: RefObject<Mesh | null>) => {
+export const useBallAnimations = (ballMeshRef: RefObject<Mesh | null>) => {
 
   const { contextSafe } = useGSAP()
 

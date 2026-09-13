@@ -3,7 +3,7 @@ import { type RefObject } from "react"
 import type { Mesh, Vector3 } from "three"
 import { resetBallPosition } from "./utils/ballActionsFunctions"
 import { useFrame } from "@react-three/fiber"
-import { useBallAnimation } from "./hooks/useBallAnimation"
+import { useBallAnimations } from "./hooks/useBallAnimation"
 
 const ballDiameter_M = 0.05
 
@@ -15,14 +15,14 @@ type BallProps = {
 }
 
 export const Ball = ({ rigidBodyRef, meshRef, isShootingRef, initialPosition }: BallProps) => {
-  const { shoot: ballShootAnimation } = useBallAnimation(meshRef)
+  const ballAnimations = useBallAnimations(meshRef)
 
   useFrame(() => {
     if (rigidBodyRef.current) {
       const position = rigidBodyRef.current.translation()
       if (position.y < -2 || position.z > 10) {
         resetBallPosition(rigidBodyRef, isShootingRef)
-        ballShootAnimation.reset()
+        ballAnimations.shoot.reset()
       }
     }
   })

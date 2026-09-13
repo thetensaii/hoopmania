@@ -21,7 +21,7 @@ import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 import { ToneMappingMode } from "postprocessing"
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { getTimeLeftInSec } from "../hooks/useGetTimeLeft"
-import { useBallAnimation } from "./hooks/useBallAnimation"
+import { useBallAnimations } from "./hooks/useBallAnimation"
 
 const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
@@ -40,7 +40,7 @@ export const Experience = () => {
   const isShootingRef = useRef<boolean>(false)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
-  const { shoot: ballShootAnimation } = useBallAnimation(ballMeshRef)
+  const ballAnimations = useBallAnimations(ballMeshRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
   const endGameFn = useEndGameFn()
   const createFirework = useFireworksState((state) => state.createFirework)
@@ -75,7 +75,7 @@ export const Experience = () => {
         createFirework(new Vector3(x, y, z))
       }
     }
-    ballShootAnimation.reset()
+    ballAnimations.shoot.reset()
   }
 
 
@@ -84,7 +84,7 @@ export const Experience = () => {
     shootAudio.currentTime = 0
     shootAudio.play()
     shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
-    ballShootAnimation.trigger()
+    ballAnimations.shoot.trigger()
   }
   return <>
     <Preload all />
