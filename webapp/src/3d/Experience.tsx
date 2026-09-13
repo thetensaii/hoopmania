@@ -10,7 +10,7 @@ import { Group, Mesh, Vector3 } from "three"
 import { ShootingPlane } from "./ShootingPlane"
 import { BALL_INITIAL_POS, resetBallPosition, shootBall } from "./utils/ballActionsFunctions"
 import { ShootingArrow } from "./ShootingArrow"
-import { useShootingArrowActions } from "../hooks/3d/useShootingArrowActions"
+import { useShootingArrowActions, type PointerDirection } from "../hooks/3d/useShootingArrowActions"
 import { useEndGameFn } from "../hooks/useEndGameFn"
 import { useGamePhase } from "../hooks/useGamePhase"
 import { Fireworks } from "./Fireworks"
@@ -21,6 +21,7 @@ import { setIntervalAsync, clearIntervalAsync } from 'set-interval-async';
 import { ToneMappingMode } from "postprocessing"
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { getTimeLeftInSec } from "../hooks/useGetTimeLeft"
+import { useBallAnimation } from "./hooks/useBallAnimation"
 
 const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
@@ -35,9 +36,11 @@ export const Experience = () => {
   const ballRigidBodyRef = useRef<RapierRigidBody>(null)
   const arrowGroupRef = useRef<Group>(null)
   const arrowRef = useRef<Mesh>(null)
+  const ballMeshRef = useRef<Mesh>(null)
   const isShootingRef = useRef<boolean>(false)
 
   const scoreBucket = useGameState((state) => state.scoreBucket)
+  const { shoot: ballShootAnimation } = useBallAnimation(ballMeshRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
   const endGameFn = useEndGameFn()
   const createFirework = useFireworksState((state) => state.createFirework)
@@ -72,15 +75,24 @@ export const Experience = () => {
         createFirework(new Vector3(x, y, z))
       }
     }
+    ballShootAnimation.reset()
   }
 
+
+
+  const onShoot = (pointerDirection: PointerDirection) => {
+    shootAudio.currentTime = 0
+    shootAudio.play()
+    shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
+    ballShootAnimation.trigger()
+  }
   return <>
     <Preload all />
     <color args={["black"]} attach="background" />
     <Lights />
     <Physics>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />
-      <Ball rigidBodyRef={ballRigidBodyRef} isShootingRef={isShootingRef} initialPosition={BALL_INITIAL_POS} />
+      <Ball rigidBodyRef={ballRigidBodyRef} meshRef={ballMeshRef} isShootingRef={isShootingRef} initialPosition={BALL_INITIAL_POS} />
       <ShootingPlane
         position={BALL_INITIAL_POS}
         onPointerDown={(pointerDirection) => {
@@ -96,9 +108,7 @@ export const Experience = () => {
         onPointerUp={(pointerDirection) => {
           hideArrow()
           if (!isShootingRef.current && getTimeLeftInSec(lastBucketTime, Date.now()) > 0) {
-            shootAudio.currentTime = 0
-            shootAudio.play()
-            shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
+            onShoot(pointerDirection)
           }
         }} />
       <ShootingArrow arrowGroupRef={arrowGroupRef} arrowRef={arrowRef} position={BALL_INITIAL_POS} />
