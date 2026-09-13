@@ -31,7 +31,7 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
       gsap.to(materialRef.current.uniforms.uProgress, { value: 1, duration: lifeTimeInMs / 1_000, ease: 'none', onComplete: onAnimationEnd })
     }
     if (scoreGroupRef.current) {
-      gsap.to(scoreGroupRef.current.position, { y: 0.5, duration: lifeTimeInMs / 1_000 })
+      gsap.to(scoreGroupRef.current.position, { y: 1.5, duration: lifeTimeInMs / 1_000 })
     }
   })
 
@@ -55,9 +55,9 @@ export const Firework = ({ position, texture, lifeTimeInMs, onAnimationEnd }: Pr
         <uniform attach="uniforms-uTexture" value={texture} />
         <uniform attach="uniforms-uColor" value={color} />
       </rawShaderMaterial>
-      <group ref={scoreGroupRef}>
+      <group ref={scoreGroupRef} position={[1, 1, 0]}>
         <Html scale={10} center className={css({ pointerEvents: 'none', userSelect: 'none' })}>
-          <div className={css({ fontSize: 'text.heading3' })}>+1</div>
+          <div className={css({ fontSize: 'text.heading3', color: 'text.accent', fontWeight: 'bold' })}>+1</div>
         </Html>
       </group>
     </points>
