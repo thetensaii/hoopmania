@@ -22,6 +22,7 @@ import { ToneMappingMode } from "postprocessing"
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { getTimeLeftInSec } from "../hooks/useGetTimeLeft"
 import { useBallAnimations } from "./hooks/useBallAnimation"
+import { Background } from "./Background"
 
 const shootAudio = new Audio('./shoot.mp3')
 const bucketAudio = new Audio('./bonus-point.mp3')
@@ -78,18 +79,18 @@ export const Experience = () => {
     ballAnimations.shoot.reset()
   }
 
-
-
   const onShoot = (pointerDirection: PointerDirection) => {
     shootAudio.currentTime = 0
     shootAudio.play()
     shootBall(pointerDirection, ballRigidBodyRef, isShootingRef)
     ballAnimations.shoot.trigger()
   }
+
   return <>
     <Preload all />
     <color args={["black"]} attach="background" />
     <Lights />
+    <Background />
     <Physics>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />
       <Ball rigidBodyRef={ballRigidBodyRef} meshRef={ballMeshRef} isShootingRef={isShootingRef} initialPosition={BALL_INITIAL_POS} />
