@@ -40,6 +40,7 @@ export const Experience = () => {
   const ballMeshRef = useRef<Mesh>(null)
   const isShootingRef = useRef<boolean>(false)
 
+
   const scoreBucket = useGameState((state) => state.scoreBucket)
   const ballAnimations = useBallAnimations(ballMeshRef)
   const { displayArrow, moveArrow, hideArrow } = useShootingArrowActions({ arrowGroupRef, arrowRef, ballPosition: BALL_INITIAL_POS })
@@ -107,6 +108,7 @@ export const Experience = () => {
           }
         }}
         onPointerUp={(pointerDirection) => {
+          if (!arrowGroupRef.current?.visible) return
           hideArrow()
           if (!isShootingRef.current && getTimeLeftInSec(lastBucketTime, Date.now()) > 0) {
             onShoot(pointerDirection)
