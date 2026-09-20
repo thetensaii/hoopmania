@@ -1,7 +1,6 @@
 import { extend, useThree } from "@react-three/fiber"
 import { Ball } from "./Ball"
 import { Basket } from "./Basket"
-import { Lights } from "./Lights"
 import { Physics, RapierRigidBody } from "@react-three/rapier"
 import { Bloom, EffectComposer, ToneMapping } from "@react-three/postprocessing"
 import { useEffect, useRef } from "react"
@@ -89,8 +88,6 @@ export const Experience = () => {
 
   return <>
     <Preload all />
-    <color args={["black"]} attach="background" />
-    <Lights />
     <Background />
     <Physics>
       <Basket ref={basketRigidBodyRef} initialPosition={BASKET_INITIAL_POS} onBucket={handleBucket} score={score} />

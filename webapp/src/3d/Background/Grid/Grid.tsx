@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react"
-import { DoubleSide, RawShaderMaterial, Uniform } from "three"
+import { DoubleSide, RawShaderMaterial, Uniform, Vector3 } from "three"
 
 import gridVertex from './shaders/grid.vert'
 import gridFragment from './shaders/grid.frag'
@@ -8,7 +8,12 @@ import { useGamePhase } from "../../../hooks/useGamePhase"
 
 const WIDTH = 20
 const HEIGHT = 7
-export const Grid = () => {
+
+type Props = {
+  position: Vector3,
+}
+
+export const Grid = ({ position }: Props) => {
   const materialRef = useRef<RawShaderMaterial>(null)
   const { isGamePlaying } = useGamePhase()
 
@@ -29,7 +34,7 @@ export const Grid = () => {
 
 
   return (
-    <mesh position={[0, -5.3, -5]} rotation={[Math.PI / 2, 0, 0]}>
+    <mesh position={position} rotation={[Math.PI / 2, 0, 0]}>
       <planeGeometry args={[WIDTH, HEIGHT, 2, 30]} />
       <rawShaderMaterial
         ref={materialRef}
